@@ -10,7 +10,6 @@ const QuakeList = (props) => {
             placeholder={"List List List"}
           />
         </View>
-        {console.log(props.list)}
       </Callout>
     );
 };
