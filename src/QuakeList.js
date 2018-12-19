@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   flexDirection: "row",
   backgroundColor: "rgba(255, 255, 255, 0.9)",
   borderRadius: 10,
-  width: "50%",
-  marginLeft: "10%",
+  width: "60%",
+  marginLeft: "5%",
   marginRight: "30%",
   marginTop: 30
   },
