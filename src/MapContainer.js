@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Platform, Dimensions,StyleSheet,View } from 'react-native';
+import { Platform, Dimensions,StyleSheet,View, ScrollView, Text } from 'react-native';
 import { mapstyle } from './mapstyle';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker,Callout } from 'react-native-maps';
 import axios from 'axios';
-import QuakeList from './QuakeList';
+import QuakeInfo from './QuakeInfo';
 import { Constants, Location, Permissions } from 'expo';
 
 const region = {
@@ -37,30 +37,25 @@ class MapContainer extends Component {
     }
 
     _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access location was denied',
-      });
-    }
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+          this.setState({
+            errorMessage: 'Permission to access location was denied',
+          });
+        }
 
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
-    this.setState({ currentLocation:{
-                                    latitude:this.state.location.coords.latitude,
-                                    longitude:this.state.location.coords.longitude,
-                                    latitudeDelta: 0.0922,
-                                    longitudeDelta: 0.0421
-                                    }});
-
-    console.log(this.state.currentLocation);
-    console.log(this.state.currentTime);
-    // console.log(region)
+        let location = await Location.getCurrentPositionAsync({});
+        this.setState({ location });
+        this.setState({ currentLocation:{
+                                        latitude:this.state.location.coords.latitude,
+                                        longitude:this.state.location.coords.longitude,
+                                        latitudeDelta: 0.0922,
+                                        longitudeDelta: 0.0421
+                                        }});
+        // console.log(region)
   };
 
   markerDescription = (quakeTime) => {
-    const quakeUrl = "lol";
-    console.log(quakeTime);
     diff = (Date.now() - quakeTime)/1000;
     if (diff > 3600){
       diff = (Math.round((diff/60/60)*10)/10).toString()+" hours ago";
@@ -70,7 +65,21 @@ class MapContainer extends Component {
       diff = (Math.round(diff*10)/10).toString()+" seconds ago"
     }
     return diff;
-  };
+  }
+
+  renderMarkers(){
+    return this.state.quakes.map(info =>
+        <Marker
+          coordinate={{
+            latitude:  info.geometry.coordinates[1],
+            longitude: info.geometry.coordinates[0],
+          }}
+          title={info.properties.title}
+          description={this.markerDescription(info.properties.time)}
+          key = {info.properties.code}
+          />
+    );
+  }
 
   render() {
     // this.state.quakes.map(info => console.log(info.geometry.coordinates[1]));
@@ -83,22 +92,10 @@ class MapContainer extends Component {
               onLayout={this.onMapLayout}
               rotateEnabled={false}
               showCompass={false}>
-
           <View>
-              {this.state.quakes.map(info =>
-                  <Marker
-                    coordinate={{
-                      latitude:  info.geometry.coordinates[1],
-                      longitude: info.geometry.coordinates[0],
-                    }}
-                    title={info.properties.title}
-                    description={this.markerDescription(info.properties.time)}
-                    key = {info.properties.code}
-                    />
-              )}
+              {this.renderMarkers()}
           </View>
         </MapView>
-        <QuakeList currentLocation={this.state.currentLocation} list={this.state.quakes}/>
       </View>
     );
   }
