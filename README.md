@@ -24,3 +24,5 @@ viewing the location of the earthquakes on a map
 3. Clone or download this repo
 4. On your computer, navigate into the repo using the terminal
 5. Run the command ``expo start``
+
+*Note: checkout [expo](https://expo.io/) website for setup troubleshooting*
