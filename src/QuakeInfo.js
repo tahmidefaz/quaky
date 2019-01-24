@@ -2,25 +2,6 @@ import React from 'react';
 import { StyleSheet,View,ScrollView,Text } from 'react-native';
 import { Callout } from 'react-native-maps';
 
-
-          // {this.state.quakes.map(info =>
-          //     <Marker
-          //       coordinate={{
-          //         latitude:  info.geometry.coordinates[1],
-          //         longitude: info.geometry.coordinates[0],
-          //       }}
-          //       title={info.properties.title}
-          //       description={this.markerDescription(info.properties.time)}
-          //       key = {info.properties.code}
-          //       />
-          // )}
-
-          // {props.list.quakes.map(info =>
-          //   <View key={info.properties.code}>
-          //     <Text>info.properties.title</Text>
-          //   </View>
-          // )}
-
 const QuakeInfo = (props) => {
 
     return(

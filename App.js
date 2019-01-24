@@ -37,16 +37,18 @@ export default class App extends React.Component {
           title={info.properties.title}
           description={this.markerDescription(info.properties.time)}
           key = {info.properties.code}
-          />
+        />
     );
   }
 
-
   render() {
+    // this.state.quakes.map(info => console.log(info.geometry.coordinates[1]));
     return (
+      <View>
         <MapContainer>
           {this.renderMarkers()}
         </MapContainer>
+      </View>
     );
   }
 }

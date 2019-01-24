@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Platform, Dimensions,StyleSheet,View, ScrollView, Text } from 'react-native';
 import { mapstyle } from './mapstyle';
 import MapView, { Callout } from 'react-native-maps';
-// import QuakeInfo from './QuakeInfo';
 import { Constants, Location, Permissions } from 'expo';
 
 const region = {
@@ -45,11 +44,10 @@ class MapContainer extends Component {
                                         latitudeDelta: 0.0922,
                                         longitudeDelta: 0.0421
                                         }});
-        // console.log(region)
   };
 
   render() {
-    // this.state.quakes.map(info => console.log(info.geometry.coordinates[1]));
+
     return (
       <View>
           <MapView
@@ -59,10 +57,10 @@ class MapContainer extends Component {
               onLayout={this.onMapLayout}
               rotateEnabled={false}
               showCompass={false}>
-          <View>
-              {this.props.children}
-          </View>
-        </MapView>
+            <View>
+                {this.props.children}
+            </View>
+          </MapView>
       </View>
     );
   }
