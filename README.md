@@ -1,4 +1,4 @@
-# Quaky
+# Quakey
 A cross-platform mobile app for real-time earthquake information. 
 Developed using the [React Native framework](https://facebook.github.io/react-native/) with the [expo](https://expo.io/) toolchain.
 Compatible with the ios and the android platform. **This project is currently in development.** 
