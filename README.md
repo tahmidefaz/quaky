@@ -16,7 +16,7 @@ I hope to publish this app on the Google Play Store after the UI update.
 viewing the location of the earthquakes on a map
 * A lot of UI enhancements including customized map markers and app logo
 * Background earthquake data update
-* A push notification mechanism when a earthquake is detected nearby
+* A push notification mechanism for when a earthquake is detected nearby
 
 ### Quick Setup
 1. Download [Node.js](https://nodejs.org/)
