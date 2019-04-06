@@ -1,7 +1,7 @@
 # Quakey
 A cross-platform mobile app for real-time earthquake information. 
 Developed using the [React Native framework](https://facebook.github.io/react-native/) with the [expo](https://expo.io/) toolchain.
-Compatible with the ios and the android platform. **This project is currently in development.** 
+Compatible with the ios and the android platform. **This project is currently under development.** 
 I hope to publish this app on the Google Play Store after the UI update. 
 
 ## Things That Are Working
@@ -16,9 +16,9 @@ I hope to publish this app on the Google Play Store after the UI update.
 viewing the location of the earthquakes on a map
 * A lot of UI enhancements including customized map markers and app logo
 * Background earthquake data update
-* A push notification mechanism when a earthquake is detected nearby
+* A push notification mechanism for when a earthquake is detected nearby
 
-### Quick setup
+### Quick Setup
 1. Download [Node.js](https://nodejs.org/)
 2. Get the expo cli using ``npm install expo-cli --global``
 3. Clone or download this repo
