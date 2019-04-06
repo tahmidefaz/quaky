@@ -3,7 +3,6 @@ import { StyleSheet,View,ScrollView,Text } from 'react-native';
 import { Callout } from 'react-native-maps';
 
 const QuakeInfo = (props) => {
-
     return(
       <Callout>
         {props.currentLocation}

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Platform, Dimensions,StyleSheet,View, ScrollView, Text } from 'react-native';
+import { Marker } from 'react-native-maps';
 import { mapstyle } from './mapstyle';
 import MapView, { Callout } from 'react-native-maps';
+import axios from 'axios';
 import { Constants, Location, Permissions } from 'expo';
 
 const region = {
@@ -13,6 +15,7 @@ const region = {
 
 class MapContainer extends Component {
     state = {
+      quakes: [],
       location: null,
       errorMessage: null,
       currentLocation: region,
@@ -26,6 +29,11 @@ class MapContainer extends Component {
       } else {
         this._getLocationAsync();
       }
+    }
+
+    componentDidMount() {
+      axios.get('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson')
+        .then(response => this.setState({ quakes: response.data.features }));
     }
 
     _getLocationAsync = async () => {
@@ -46,10 +54,35 @@ class MapContainer extends Component {
                                         }});
   };
 
+  markerDescription = (quakeTime) => {
+    diff = (Date.now() - quakeTime)/1000;
+    if (diff > 3600){
+      diff = (Math.round((diff/60/60)*10)/10).toString()+" hours ago";
+    } else if (diff < 3600 && diff > 60){
+      diff = (Math.round((diff/60)*10)/10).toString()+" minutes ago"
+    } else{
+      diff = (Math.round(diff*10)/10).toString()+" seconds ago"
+    }
+    return diff;
+  }
+
+  renderMarkers(){
+    return this.state.quakes.map(info =>
+        <Marker
+          coordinate={{
+            latitude:  info.geometry.coordinates[1],
+            longitude: info.geometry.coordinates[0],
+          }}
+          title={info.properties.title}
+          description={this.markerDescription(info.properties.time)}
+          key = {info.properties.code}
+        />
+    );
+  }
+
   render() {
 
     return (
-      <View>
           <MapView
               style={styles.map}
               region={this.state.currentLocation}
@@ -58,10 +91,9 @@ class MapContainer extends Component {
               rotateEnabled={false}
               showCompass={false}>
             <View>
-                {this.props.children}
+                {this.renderMarkers()}
             </View>
           </MapView>
-      </View>
     );
   }
 }
