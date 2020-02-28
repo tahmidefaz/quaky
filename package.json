@@ -9,7 +9,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "expo": "^35.0.1",
-    "react": "16.11.0",
+    "react": "16.13.0",
     "react-axios": "^2.0.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.2.tar.gz",
     "react-native-maps": "^0.26.1"
