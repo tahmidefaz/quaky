@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import MapContainer from './src/MapContainer';
+import AppNav from './src/components/AppNav';
+
 
 export default class App extends React.Component {
   render() {
     return (
-      <View>
-        <MapContainer/>
-      </View>
+      <AppNav/>
     );
   }
 }
