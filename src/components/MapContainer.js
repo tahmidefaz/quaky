@@ -105,11 +105,11 @@ class MapContainer extends Component {
     );
   }
 
-  showinfo(){
-    this.state.quakes.map(info =>
-      this.calculateDistance(info.geometry.coordinates[1],info.geometry.coordinates[0],"M")
-    );
-  }
+  // showinfo(){
+  //   this.state.quakes.map(info =>
+  //     this.calculateDistance(info.geometry.coordinates[1],info.geometry.coordinates[0],"M")
+  //   );
+  // }
 
   render() {
     return (

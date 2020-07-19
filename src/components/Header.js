@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 const Header = (props) => (
     <Appbar.Header dark={true}>
         <StatusBar style='light'/>
-       <Appbar.Content title={props.title}/>
+       <Appbar.Content title={props.title} subtitle='Looking for new data in ....'/>
     </Appbar.Header>
 );
 
