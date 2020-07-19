@@ -21,15 +21,15 @@ class MapContainer extends Component {
       currentLocation: region,
     };
 
-    componentWillMount(){
-      if (Platform.OS === 'android' && !Constants.isDevice) {
-      this.setState({
-        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-        });
-      } else {
-        this._getLocationAsync();
-      }
-    }
+    // componentDidMount(){
+    //   if (Platform.OS === 'android' && !Constants.isDevice) {
+    //   this.setState({
+    //     errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+    //     });
+    //   } else {
+    //     this._getLocationAsync();
+    //   }
+    // }
 
     componentDidMount() {
       axios.get('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson')

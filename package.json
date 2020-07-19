@@ -8,12 +8,12 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "expo": "^36.0.2",
+    "expo": "^38.0.0",
     "expo-cli": "^3.22.3",
-    "react": "16.13.1",
+    "react": "16.11.0",
     "react-axios": "^2.0.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.2.tar.gz",
-    "react-native-maps": "^0.27.1"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
+    "react-native-maps": "0.27.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.2.3"
