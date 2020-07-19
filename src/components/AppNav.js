@@ -1,16 +1,33 @@
 import * as React from 'react';
+import { View } from 'react-native';
 import { BottomNavigation, Text } from 'react-native-paper';
+import Header from './Header';
 import MapContainer from './MapContainer';
 
-const ListRoute = () => <Text>Quake List</Text>;
+const ListRoute = () => {
+  return (
+    <View>
+      <Header title="List View" />
+      <Text>Quake List</Text>
+    </View>
+  );
+};
 
-const MapRoute = () => <MapContainer/>;
+const MapRoute = () => {
+  return (
+    <View>
+      <Header title="Map View" />
+      <MapContainer/>
+    </View>
+  );
+};
+
 
 const AppNav = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'listview', title: 'List', icon: 'watermark' },
-    { key: 'mapview', title: 'Map', icon: 'warehouse' },
+    { key: 'listview', title: 'List', icon: 'format-list-bulleted' },
+    { key: 'mapview', title: 'Map', icon: 'map' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
