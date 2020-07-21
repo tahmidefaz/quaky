@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ScrollView } from 'react-native';
 import { List, Colors } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 
@@ -7,6 +8,7 @@ const ListItems = (props) => {
     const state = useSelector(state => state)
 
     return (
+        <ScrollView>
         <List.Section>
             {/* <List.Item
                 title="First Item"
@@ -36,6 +38,7 @@ const ListItems = (props) => {
                 )
             }
         </List.Section>
+        </ScrollView>
     )
 };
 

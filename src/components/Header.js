@@ -6,7 +6,7 @@ const Header = (props) => {
     return (
         <Appbar.Header dark={true}>
             <StatusBar style='light'/>
-            <Appbar.Content title={props.title} subtitle='Looking for new data in ....'/>
+            <Appbar.Content title={props.title}/>
         </Appbar.Header>
     );
 }
