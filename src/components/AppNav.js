@@ -1,64 +1,78 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { connect } from "react-redux";
-import * as actionCreators from "../actions/index";
+import { loadQuakeData } from "../actions";
 import { bindActionCreators } from "redux";
 import { BottomNavigation, Text } from 'react-native-paper';
 import Header from './Header';
 import ListItems from './ListItems';
-import MapContainer from './MapContainer';
-
-const ListRoute = (props) => {
-  return (
-    <View>
-      <Header title="List View" />
-      {/* <Text>Quake List</Text> */}
-      <ListItems handleDataRefresh={props.loadQuakeData} quakeData={props.data}/>
-    </View>
-  );
-};
-
-const MapRoute = () => {
-  return (
-    <View>
-      <Header title="Map View" />
-      <MapContainer/>
-    </View>
-  );
-};
+import MapView from './MapView';
+// import MapContainer from './MapContainer';
 
 
-const AppNav = () => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'listview', title: 'List', icon: 'format-list-bulleted' },
-    { key: 'mapview', title: 'Map', icon: 'map' },
-  ]);
+class AppNav extends React.Component {
+  state = {
+    index: 0,
+    routes: [
+      { key: 'listView', title: 'List', icon: 'format-list-bulleted' },
+      { key: 'mapView', title: 'Map', icon: 'map' },
+    ],
+  };
+  
+  _handleIndexChange = index => this.setState({ index });
 
-  const renderScene = BottomNavigation.SceneMap({
-    listview: ListRoute,
-    mapview: MapRoute,
+  _renderScene = BottomNavigation.SceneMap({
+    listview: ListItems,
+    mapview: MapView,
   });
 
-  return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-    />
-  );
+  quakeDataLoad = () => {
+    let { actions } = this.props;
+    actions.loadQuakeData();
+  }
+
+  // ListRoute() {
+  //   return (
+  //     <View>
+  //       <Header title="List View" />
+  //       <Text>{ quakeDataLoad() }</Text>
+  //       <ListItems handleDataRefresh={this.props.loadQuakeData} quakeData={this.props.data}/>
+  //     </View>
+  //   );
+  // }
+  
+  // MapRoute() {
+  //   return (
+  //     <View>
+  //       <Header title="Map View" />
+  //       <MapContainer/>
+  //     </View>
+  //   );
+  // }
+
+  render() {
+    return (
+      <BottomNavigation
+        navigationState={this.state}
+        onIndexChange={this._handleIndexChange}
+        renderScene={this._renderScene}
+      />
+    );
+  }
 };
 
-const mapStateToProps=(state)=>{
-  return state
-};
 
-// const ActionCreators = Object.assign(
-//   {},
-//   changeCount,
-// );
-// const mapDispatchToProps = dispatch => ({
-//   actions: bindActionCreators(ActionCreators, dispatch),
-// });
+const mapStateToProps = state => ({
+  quakeData: state.quakeData,
+});
 
-export default connect (mapStateToProps, actionCreators) (AppNav);
+const ActionCreators = Object.assign(
+  {},
+  loadQuakeData,
+);
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(ActionCreators, dispatch),
+});
+
+export default connect (mapStateToProps, mapDispatchToProps) (AppNav);

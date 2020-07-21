@@ -1,14 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {createStore, applyMiddleware} from 'redux';
 import {Provider as StoreProvider} from 'react-redux';
-import thunk from 'redux-thunk';
-import reducers from './src/reducers/index.js'
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import AppNav from './src/components/AppNav';
+import AppNav from './src/components/AppNavHook';
 
-
-let store = createStore(reducers, applyMiddleware(thunk))
+import store from './src/store/configureStore';
 
 const theme = {
   ...DefaultTheme,
