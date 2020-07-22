@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FETCH_QUAKE_DATA } from '../constants';
-
+import {FETCH_CURRENT_LOCATION} from '../constants';
 import { TEST_ACTION } from '../constants';
 
 
@@ -16,9 +16,34 @@ export function loadQuakeData() {
 
 function quakeData(features) {
     console.log("fetched");
+    // features.forEach((feature, i) => features[i] = updateFeature(feature));
     return {
         type: FETCH_QUAKE_DATA,
         payload: features
+    }
+}
+
+const defaultLocation = {
+    latitude: 37,
+    longitude: -122,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+  }
+
+export function loadCurrentLocation(currentLocation) {
+    let location = defaultLocation
+    if(currentLocation !={} ){
+        location = {
+            latitude: currentLocation.coords.latitude,
+            longitude: currentLocation.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+        }
+    }
+    console.log("location updated\n", location)
+    return {
+        type: FETCH_CURRENT_LOCATION,
+        payload: location
     }
 }
 

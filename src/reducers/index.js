@@ -1,5 +1,5 @@
 import { FETCH_QUAKE_DATA } from '../constants';
-
+import { FETCH_CURRENT_LOCATION } from '../constants';
 import { TEST_ACTION } from '../constants';
 
 let defaultQuakeData={
@@ -14,6 +14,11 @@ const quakeDataReducer = (state = defaultQuakeData, action) => {
                 ...state,
                 quakeData: action.payload
             };
+        case FETCH_CURRENT_LOCATION:
+            return {
+                ...state,
+                currentLocation: action.payload
+            }
         case TEST_ACTION:
             return {
                 ...state,

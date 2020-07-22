@@ -27,6 +27,12 @@ const ListItems = (props) => {
                 left={props => <List.Icon {...props} color={Colors.green500} icon="circle" />}
                 onPress={() => quakeData() }
             /> */}
+            <List.Item
+                title="Second Item"
+                description="Item description"
+                left={props => <List.Icon {...props} color={Colors.red500} icon="circle" />}
+                onPress={() => console.log(state.currentLocation)}
+            />
             {
                 state.quakeData.map(quake =>
                     <List.Item

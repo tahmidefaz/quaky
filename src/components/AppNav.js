@@ -1,78 +1,59 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import { connect } from "react-redux";
-import { loadQuakeData } from "../actions";
-import { bindActionCreators } from "redux";
-import { BottomNavigation, Text } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { BottomNavigation } from 'react-native-paper';
+import { loadQuakeData, loadCurrentLocation, loadTestAction } from '../actions';
+
 import Header from './Header';
 import ListItems from './ListItems';
-import MapView from './MapView';
-// import MapContainer from './MapContainer';
+import MapContainer from './MapContainer';
 
 
-class AppNav extends React.Component {
-  state = {
-    index: 0,
-    routes: [
-      { key: 'listView', title: 'List', icon: 'format-list-bulleted' },
-      { key: 'mapView', title: 'Map', icon: 'map' },
-    ],
-  };
-  
-  _handleIndexChange = index => this.setState({ index });
-
-  _renderScene = BottomNavigation.SceneMap({
-    listview: ListItems,
-    mapview: MapView,
-  });
-
-  quakeDataLoad = () => {
-    let { actions } = this.props;
-    actions.loadQuakeData();
-  }
-
-  // ListRoute() {
-  //   return (
-  //     <View>
-  //       <Header title="List View" />
-  //       <Text>{ quakeDataLoad() }</Text>
-  //       <ListItems handleDataRefresh={this.props.loadQuakeData} quakeData={this.props.data}/>
-  //     </View>
-  //   );
-  // }
-  
-  // MapRoute() {
-  //   return (
-  //     <View>
-  //       <Header title="Map View" />
-  //       <MapContainer/>
-  //     </View>
-  //   );
-  // }
-
-  render() {
-    return (
-      <BottomNavigation
-        navigationState={this.state}
-        onIndexChange={this._handleIndexChange}
-        renderScene={this._renderScene}
-      />
-    );
-  }
+const ListRoute = (props) => {
+  return (
+    <View>
+      <Header title="List View" />
+      <ListItems />
+    </View>
+  );
 };
 
 
-const mapStateToProps = state => ({
-  quakeData: state.quakeData,
-});
+const MapRoute = () => {
+  return (
+    <View>
+      <Header title="Map View" />
+      <MapContainer/>
+    </View>
+  );
+};
 
-const ActionCreators = Object.assign(
-  {},
-  loadQuakeData,
-);
+const AppNav = () => {
+  const [index, setIndex] = React.useState(0);
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch),
-});
+  // Load Earthquake Data
+  const dispatch = useDispatch();
+  const getQuakeData = () => dispatch(loadQuakeData());
+  useEffect(() => getQuakeData());
 
-export default connect (mapStateToProps, mapDispatchToProps) (AppNav);
+  const [routes] = React.useState([
+    { key: 'listview', title: 'List', icon: 'format-list-bulleted' },
+    { key: 'mapview', title: 'Map', icon: 'map' },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    listview: ListRoute,
+    mapview: MapRoute,
+  });
+
+  return (
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+    />
+  );
+};
+  
+export default AppNav;
+  

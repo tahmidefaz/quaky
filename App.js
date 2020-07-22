@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
+import * as Location from 'expo-location';
+
 import {Provider as StoreProvider} from 'react-redux';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import AppNav from './src/components/AppNavHook';
+import AppNav from './src/components/AppNav';
 
+import { loadCurrentLocation } from './src/actions';
 import store from './src/store/configureStore';
 
 const theme = {
@@ -16,18 +19,26 @@ const theme = {
   },
 };
 
+export default function App() {
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== 'granted') {
+        store.dispatch(loadCurrentLocation({}));
+      }
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <StoreProvider store={store}>
+      let location = await Location.getCurrentPositionAsync({});
+      store.dispatch(loadCurrentLocation(location));
+    })();
+  });
+
+  return (
+    <StoreProvider store={store}>
         <PaperProvider theme={theme}>
           <AppNav />
         </PaperProvider>
       </StoreProvider>
-      
-    );
-  }
+  );
 }
 
 const styles = StyleSheet.create({
