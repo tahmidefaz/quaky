@@ -29,21 +29,23 @@ const defaultLocation = {
 export default function App() {
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestPermissionsAsync();
+      let { status } = await Location.requestPermissionsAsync()
       if (status !== 'granted') {
         store.dispatch(loadCurrentLocation(defaultLocation));
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-
-      let parsedLocation = {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-      }
-      store.dispatch(loadCurrentLocation(parsedLocation));
-      console.log('STATUS', status)
+      let location = await Location.getCurrentPositionAsync({})
+      .then((location)=>
+        store.dispatch(loadCurrentLocation({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          })
+        ))
+      .catch((error)=>
+        store.dispatch(loadCurrentLocation(defaultLocation))
+      );
     })();
   });
 

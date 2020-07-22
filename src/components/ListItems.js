@@ -3,6 +3,8 @@ import { ScrollView } from 'react-native';
 import { List, Colors } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 
+import { markerDescription } from '../misc/support_functions'
+
 
 const ListItems = (props) => {
     const state = useSelector(state => state)
@@ -37,7 +39,7 @@ const ListItems = (props) => {
                 state.quakeData.map(quake =>
                     <List.Item
                     title={quake.properties.title}
-                    description="Item description"
+                    description={markerDescription(quake.properties.time)}
                     left={props => <List.Icon {...props} color={Colors.yellow900} icon="circle" />}
                     key={ quake.properties.code }
                  />
