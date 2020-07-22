@@ -23,27 +23,11 @@ function quakeData(features) {
     }
 }
 
-const defaultLocation = {
-    latitude: 37,
-    longitude: -122,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421
-  }
 
 export function loadCurrentLocation(currentLocation) {
-    let location = defaultLocation
-    if(currentLocation !={} ){
-        location = {
-            latitude: currentLocation.coords.latitude,
-            longitude: currentLocation.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-        }
-    }
-    console.log("location updated\n", location)
     return {
         type: FETCH_CURRENT_LOCATION,
-        payload: location
+        payload: {...currentLocation}
     }
 }
 

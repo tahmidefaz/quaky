@@ -19,16 +19,31 @@ const theme = {
   },
 };
 
+const defaultLocation = {
+  latitude: 37,
+  longitude: -122,
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421
+}
+
 export default function App() {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestPermissionsAsync();
       if (status !== 'granted') {
-        store.dispatch(loadCurrentLocation({}));
+        store.dispatch(loadCurrentLocation(defaultLocation));
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      store.dispatch(loadCurrentLocation(location));
+
+      let parsedLocation = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      }
+      store.dispatch(loadCurrentLocation(parsedLocation));
+      console.log('STATUS', status)
     })();
   });
 
