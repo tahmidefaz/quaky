@@ -6,7 +6,7 @@ let defaultQuakeData={
     isDialogOpen: false,
     selected_feature: {
         mag: 0,
-        time:1595472668,
+        time:"",
         url:"",
         place:"",
         longitude: 0,

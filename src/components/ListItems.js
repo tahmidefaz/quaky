@@ -27,13 +27,13 @@ const ListItems = (props) => {
     const handleItemPress = (quakeData) => {
         dispatch(
             loadSelectedFeature({
-                mag: quakeData.properties.mag,
+                mag: quakeData.properties.mag.toFixed(2),
                 time: quakeData.properties.time,
                 url: quakeData.properties.url,
                 place: quakeData.properties.place,
                 longitude: quakeData.geometry.coordinates[0],
                 latitude: quakeData.geometry.coordinates[1],
-                depth: quakeData.geometry.coordinates[2]
+                depth: quakeData.geometry.coordinates[2].toFixed(2)
             })
         );
         dispatch(setDialogStatus(true));

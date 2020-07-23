@@ -4,6 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { setDialogStatus } from '../actions';
 
+const dateParser = (timestamp) => {
+  const date = new Date(timestamp);
+  return date.toUTCString();
+}
+
 const QuakeDialog = (props) => {
   const state = useSelector(state => state)
 
@@ -15,10 +20,10 @@ const QuakeDialog = (props) => {
       <Dialog visible={state.isDialogOpen} onDismiss={hideDialog}>
         <Dialog.Title>Earthquake Information</Dialog.Title>
         <Dialog.Content>
-          <Paragraph>Magnitude: { state.selected_feature.mag }</Paragraph>
-          <Paragraph>Depth: { state.selected_feature.depth }</Paragraph>
+          <Paragraph>Magnitude: { state.selected_feature.mag+" M" }</Paragraph>
+          <Paragraph>Depth: { state.selected_feature.depth+" km" }</Paragraph>
           <Paragraph>Place: { state.selected_feature.place }</Paragraph>
-          <Paragraph>Time: { state.selected_feature.time }</Paragraph>
+          <Paragraph>Time: { dateParser(state.selected_feature.time) }</Paragraph>
           <Paragraph>URL: { state.selected_feature.url }</Paragraph>
         </Dialog.Content>
       </Dialog>
