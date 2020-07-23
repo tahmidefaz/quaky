@@ -10,10 +10,11 @@ import MapContainer from './MapContainer';
 
 
 const ListRoute = (props) => {
+  // { console.log("ListRoute", props.jumpTo) }
   return (
     <View>
-      <Header title="List View" />
-      <ListItems />
+      <Header title="List View"/>
+      <ListItems {...props} />
     </View>
   );
 };

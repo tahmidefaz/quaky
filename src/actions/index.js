@@ -1,7 +1,9 @@
 import axios from "axios";
-import { FETCH_QUAKE_DATA } from '../constants';
-import {FETCH_CURRENT_LOCATION} from '../constants';
-import { TEST_ACTION } from '../constants';
+// import { FETCH_QUAKE_DATA } from '../constants';
+// import {FETCH_CURRENT_LOCATION} from '../constants';
+// import {DIALOG_STATUS} from '../constants';
+// import { TEST_ACTION } from '../constants';
+import * as ACTIONS from '../constants';
 
 
 export function loadQuakeData() {
@@ -15,10 +17,10 @@ export function loadQuakeData() {
 }
 
 function quakeData(features) {
-    console.log("fetched");
+    // console.log("fetched");
     // features.forEach((feature, i) => features[i] = updateFeature(feature));
     return {
-        type: FETCH_QUAKE_DATA,
+        type: ACTIONS.FETCH_QUAKE_DATA,
         payload: features
     }
 }
@@ -26,14 +28,28 @@ function quakeData(features) {
 
 export function loadCurrentLocation(currentLocation) {
     return {
-        type: FETCH_CURRENT_LOCATION,
+        type: ACTIONS.FETCH_CURRENT_LOCATION,
         payload: {...currentLocation}
+    }
+}
+
+export function setDialogStatus(visible) {
+    return {
+        type: ACTIONS.DIALOG_STATUS,
+        payload: visible
+    }
+}
+
+export function loadSelectedFeature(feature) {
+    return {
+        type: ACTIONS.SELECTED_FEATURE,
+        payload: { ...feature }
     }
 }
 
 export function loadTestAction() {
     return {
-        type: TEST_ACTION,
+        type: ACTIONS.TEST_ACTION,
         payload: {"test_obj": true}
     }
 }

@@ -27,10 +27,11 @@ const renderMarkers = (state) => {
 
 const MapContainer = () => {
     const state = useSelector(state => state);
+    let mapRegion = state.currentLocation;
     return(
         <MapView
               style={styles.map}
-              region={state.currentLocation}
+              region={mapRegion}
               customMapStyle = {mapstyle}
               onLayout={this.onMapLayout}
               rotateEnabled={false}
