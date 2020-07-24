@@ -1,6 +1,6 @@
 import * as ACTIONS from '../constants';
 
-let defaultQuakeData={
+export const defaultQuakeData={
     quakeData: [],
     currentLocation: {},
     isDialogOpen: false,
@@ -16,7 +16,7 @@ let defaultQuakeData={
     test_obj: {}
 }
 
-const quakeDataReducer = (state = defaultQuakeData, action) => {
+export const quakeDataReducer = (state = defaultQuakeData, action) => {
     switch(action.type) {
         case ACTIONS.FETCH_QUAKE_DATA:
             return {
@@ -49,5 +49,3 @@ const quakeDataReducer = (state = defaultQuakeData, action) => {
             }
     }
 }
-
-export default quakeDataReducer;

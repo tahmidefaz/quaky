@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { List, Colors } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setDialogStatus, loadSelectedFeature } from '../actions';
+import { loadQuakeData, setDialogStatus, loadSelectedFeature } from '../actions';
 import { loaSelectFeature } from '../actions';
 
 import { markerDescription } from '../misc/support_functions';
@@ -20,9 +20,24 @@ const listItemColor = (mag) => {
     }
 }
 
+// const wait = (timeout) => {
+//     return new Promise(resolve => {
+//       setTimeout(resolve, timeout);
+//     });
+// }
+
+
 const ListItems = (props) => {
     const state = useSelector(state => state)
     const dispatch = useDispatch();
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+    
+        dispatch(loadQuakeData()).then(() => setRefreshing(false));
+      }, []);
 
     const handleItemPress = (quakeData) => {
         dispatch(
@@ -38,8 +53,13 @@ const ListItems = (props) => {
         );
         dispatch(setDialogStatus(true));
     }
+
     return (
-        <ScrollView>
+        <ScrollView
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+        >
             <List.Section>
                 {
                     state.quakeData.map(quake =>

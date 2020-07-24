@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import quakeDataReducer from '../reducers'; 
+import { defaultQuakeData, quakeDataReducer } from '../reducers'; 
 
 const store = createStore(
     quakeDataReducer,
+    defaultQuakeData,
     applyMiddleware(thunk)
   );
 

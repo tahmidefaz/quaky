@@ -35,7 +35,12 @@ const AppNav = () => {
   // Load Earthquake Data
   const dispatch = useDispatch();
   const getQuakeData = () => dispatch(loadQuakeData());
-  useEffect(() => getQuakeData());
+  useEffect(() => {
+    async function quakeDataAction() {
+      getQuakeData().then(() => console.log('fetched data'));
+    }
+    quakeDataAction();
+  },[]);
 
   const [routes] = React.useState([
     { key: 'listview', title: 'List', icon: 'format-list-bulleted' },
