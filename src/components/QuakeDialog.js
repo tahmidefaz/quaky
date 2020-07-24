@@ -14,17 +14,24 @@ const QuakeDialog = (props) => {
 
   const dispatch = useDispatch();
   const hideDialog = () => dispatch(setDialogStatus(false));
-  console.log(state.selected_feature)
+  // console.log(state.selected_feature)
   return (
     <Portal>
       <Dialog visible={state.isDialogOpen} onDismiss={hideDialog}>
         <Dialog.Title>Earthquake Information</Dialog.Title>
-        <Dialog.Content>
+        {/* <Dialog.Content>
           <Paragraph>Magnitude: { state.selected_feature.mag+" M" }</Paragraph>
           <Paragraph>Depth: { state.selected_feature.depth+" km" }</Paragraph>
           <Paragraph>Place: { state.selected_feature.place }</Paragraph>
           <Paragraph>Time: { dateParser(state.selected_feature.time) }</Paragraph>
           <Paragraph>URL: { state.selected_feature.url }</Paragraph>
+        </Dialog.Content> */}
+        <Dialog.Content>
+          <Paragraph>Magnitude: { props.data.mag+" M" }</Paragraph>
+          <Paragraph>Depth: { props.data.depth+" km" }</Paragraph>
+          <Paragraph>Place: { props.data.place }</Paragraph>
+          <Paragraph>Time: { dateParser(props.data.time) }</Paragraph>
+          <Paragraph>URL: { props.data.url }</Paragraph>
         </Dialog.Content>
       </Dialog>
     </Portal>
