@@ -1,22 +1,18 @@
 import * as React from 'react';
-import { Paragraph, Dialog, Portal, Button, Divider, Subheading, Caption, IconButton, Text, Colors } from 'react-native-paper';
+import { Dialog, Portal, Button, Divider, Caption, IconButton, Text, Colors } from 'react-native-paper';
 import { StyleSheet, View, Linking } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setDialogStatus, setMapRegion } from '../actions';
-import { listItemColor } from '../misc/support_functions';
+import { listItemColor, convertDMS, dateParser } from '../misc/support_functions';
 
-const dateParser = (timestamp) => {
-  const date = new Date(timestamp);
-  return date.toUTCString();
-}
 
 const QuakeDialog = (props) => {
   const state = useSelector(state => state)
 
   const dispatch = useDispatch();
   const hideDialog = () => {
-    dispatch(setMapRegion(state.currentLocation.latitude, state.currentLocation.longitude));
+    // dispatch(setMapRegion(state.currentLocation.latitude, state.currentLocation.longitude));
     dispatch(setDialogStatus(false))
   };
   
@@ -31,7 +27,9 @@ const QuakeDialog = (props) => {
   return (
     <Portal>
       <Dialog visible={state.isDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
-        <Dialog.Title style={styles.headerText}>{props.data.place}</Dialog.Title>
+        <Dialog.Title adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={styles.headerText}>
+          {props.data.place}
+        </Dialog.Title>
         <Divider/>
         <Dialog.Content style={styles.body}>
           
@@ -41,14 +39,18 @@ const QuakeDialog = (props) => {
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Magnitude</Text>
-              <Caption>{ props.data.mag+" M" }</Caption>
+              <Caption adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling>
+                { props.data.mag+" M" }
+              </Caption>
             </View>
             <View style={styles.rowIconStyle}>
               <IconButton icon="office-building" size={iconSize}/>
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Depth</Text>
-              <Caption>{ (props.data.depth*0.623171).toFixed(2)+" miles" }</Caption>
+              <Caption adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling>
+                { (props.data.depth*0.623171).toFixed(2)+" miles" }
+              </Caption>
             </View>
           </View>
 
@@ -58,15 +60,18 @@ const QuakeDialog = (props) => {
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Location</Text>
-              {/* <Caption style={styles.longTextSize}>{ props.data.place }</Caption> */}
-              <Caption style={styles.longTextSize}>Location Information</Caption>
+              <Caption adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling>
+                { convertDMS(props.data.latitude, props.data.longitude) }
+              </Caption>
             </View>
             <View style={styles.rowIconStyle}>
               <IconButton icon="earth" size={iconSize}/>
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Distance</Text>
-              <Caption>{ props.data.distance }</Caption>
+              <Caption adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling>
+                { props.data.distance }
+              </Caption>
             </View>
           </View>
 
@@ -76,16 +81,18 @@ const QuakeDialog = (props) => {
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Time</Text>
-              {/* <Caption style={styles.longTextSize}>{ dateParser(props.data.time) }</Caption> */}
-              <Caption style={styles.longTextSize}>Placeholder Time</Caption>
+              <Caption adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling>
+                { dateParser(props.data.time) }
+              </Caption>
             </View>
             <View style={styles.rowIconStyle}>
               <IconButton icon="web" size={iconSize}/>
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Full Report</Text>
-              <Caption style={styles.linkStyle} onPress={() => Linking.openURL(props.data.url)}>View Full Report</Caption>
-              {/* { console.log("coords", props.data.latitude, props.data.longitude)} */}
+              <Caption adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={styles.linkStyle} onPress={() => Linking.openURL(props.data.url)}>
+                View Full Report
+              </Caption>
             </View>
           </View>
         </Dialog.Content>
@@ -112,7 +119,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'white',
     paddingTop: "5%",
-    paddingHorizontal:"2%"
+    paddingHorizontal:"1%"
   },
   rowStyle: {
     padding:"2%",
@@ -130,9 +137,6 @@ const styles = StyleSheet.create({
   linkStyle: {
     textDecorationLine: 'underline',
     color: 'blue'
-  },
-  longTextSize: {
-    fontSize: 10
   },
   actionBar: {
     paddingEnd:"7%",

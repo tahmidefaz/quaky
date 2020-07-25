@@ -1,16 +1,6 @@
 import { Colors } from 'react-native-paper';
 
 
-export const updateFeature = (feature) => {
-    return {
-        ... feature,
-        custom_info:{
-            time_ago: markerDescription(feature.properties.time),
-            distace: calculateDistance(feature.geometry.coordinates[1], feature.geometry.coordinates[0],"M")
-        }
-    }
-}
-
 export const markerDescription = (quakeTime) => {
     diff = (Date.now() - quakeTime)/1000;
     if (diff > 3600){
@@ -62,3 +52,29 @@ export const listItemColor = (mag) => {
         return Colors.green500;
     }
 }
+
+const toDegreesMinutesAndSeconds = (coordinate) => {
+    const absolute = Math.abs(coordinate);
+    const degrees = Math.floor(absolute);
+    const minutesNotTruncated = (absolute - degrees) * 60;
+    const minutes = Math.floor(minutesNotTruncated);
+    const seconds = Math.floor((minutesNotTruncated - minutes) * 60);
+
+    return degrees + "°" + minutes + "\'" + seconds + "\"";
+}
+
+export const convertDMS = (lat, long) => {
+    var latitude = toDegreesMinutesAndSeconds(lat);
+    var latitudeCardinal = lat >= 0 ? "N" : "S";
+
+    var longitude = toDegreesMinutesAndSeconds(long);
+    var longitudeCardinal = long >= 0 ? "E" : "W";
+
+    return latitude + " " + latitudeCardinal + ", " + longitude + " " + longitudeCardinal;
+}
+
+export const dateParser = (timestamp) => {
+    const date = new Date(timestamp);
+    // return date.toUTCString();
+    return date.toUTCString().split(' ').slice(1).join(' ');
+  }

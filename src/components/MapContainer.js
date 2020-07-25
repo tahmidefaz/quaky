@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { Marker } from 'react-native-maps';
 import { mapstyle } from './mapstyle';
 
-import { updateFeature, markerDescription, calculateDistance } from '../misc/support_functions';
+import { markerDescription, calculateDistance } from '../misc/support_functions';
 
 const renderMarkers = (state) => {
     return state.quakeData.map(info =>
