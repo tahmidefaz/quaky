@@ -1,46 +1,76 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Dimensions,StyleSheet,View } from 'react-native';
-import MapView, { Callout } from 'react-native-maps';
-import { useSelector } from 'react-redux';
+import MapView from 'react-native-maps';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Marker } from 'react-native-maps';
 import { mapstyle } from './mapstyle';
 
+import { setMapDialogStatus, setMapRegion } from '../actions';
 import { markerDescription, calculateDistance } from '../misc/support_functions';
+import QuakeDialogMap from './QuakeDialogMap';
 
-const renderMarkers = (state) => {
-    return state.quakeData.map(info =>
-        <Marker
-          coordinate={{
-            latitude:  info.geometry.coordinates[1],
-            longitude: info.geometry.coordinates[0],
-          }}
-          title={info.properties.title}
-          description={
-              markerDescription(info.properties.time)+" "+
-              calculateDistance(info.geometry.coordinates[1],info.geometry.coordinates[0], state.currentLocation,"M")+" away"
-            }
-          key = {info.properties.code}
-        />
-    );
-}
+let updatedRegion = {};
 
 const MapContainer = () => {
-    const state = useSelector(state => state);
-    let mapRegion = state.mapRegion;
-    return(
-        <MapView
-              style={styles.map}
-              region={mapRegion}
-              customMapStyle = {mapstyle}
-              onLayout={this.onMapLayout}
-              rotateEnabled={false}
-              showCompass={false}>
-            <View>
-                {renderMarkers(state)}
-            </View>
-          </MapView>
-    )
+  const state = useSelector(state => state);
+  let mapRegion = state.mapRegion;
+
+  const [selectedData, setSelectedData] = React.useState({});
+  const dispatch = useDispatch();
+
+  const regionChangeUpdate = (region) => {
+    updatedRegion = {...region}
+  }
+
+  const openModal = (quakeData, currentRegion) => {
+    setSelectedData({
+        mag: quakeData.properties.mag.toFixed(2),
+        time: quakeData.properties.time,
+        url: quakeData.properties.url,
+        place: quakeData.properties.place,
+        longitude: quakeData.geometry.coordinates[0],
+        latitude: quakeData.geometry.coordinates[1],
+        depth: quakeData.geometry.coordinates[2].toFixed(2),
+        distance: calculateDistance(quakeData.geometry.coordinates[1], quakeData.geometry.coordinates[0], state.currentLocation, "M")
+    });
+    dispatch(setMapRegion(currentRegion.latitude, currentRegion.longitude, currentRegion.latitudeDelta, currentRegion.longitudeDelta))
+    dispatch(setMapDialogStatus(true));
+  }
+
+  return(
+    <View>
+      <MapView
+            style={styles.map}
+            region={mapRegion}
+            customMapStyle = {mapstyle}
+            rotateEnabled={false}
+            showCompass={false}
+            onRegionChangeComplete={(region) => regionChangeUpdate(region)}
+            >
+          <View>
+              {
+                state.quakeData.map(info =>
+                  <Marker
+                    coordinate={{
+                      latitude:  info.geometry.coordinates[1],
+                      longitude: info.geometry.coordinates[0],
+                    }}
+                    title={info.properties.title}
+                    description={
+                        markerDescription(info.properties.time)+" "+
+                        calculateDistance(info.geometry.coordinates[1],info.geometry.coordinates[0], state.currentLocation,"M")+" away"
+                      }
+                    key = {info.properties.code}
+                    onCalloutPress={() => openModal(info, updatedRegion)}
+                  />
+                )
+              }
+          </View>
+      </MapView>
+      <QuakeDialogMap data={selectedData}/>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

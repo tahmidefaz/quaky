@@ -37,7 +37,7 @@ const AppNav = () => {
   const getQuakeData = () => dispatch(loadQuakeData());
   useEffect(() => {
     async function quakeDataAction() {
-      getQuakeData().then(() => console.log('fetched data'));
+      getQuakeData();
     }
     quakeDataAction();
   },[]);

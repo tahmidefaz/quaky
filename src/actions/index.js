@@ -34,14 +34,33 @@ export function setDialogStatus(visible) {
     }
 }
 
-export function setMapRegion(lat, long) {
+export function setMapDialogStatus(visible) {
     return {
-        type: ACTIONS.SET_MAP_REGION,
-        payload: {
-            latitude: lat,
-            longitude: long,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
+        type: ACTIONS.MAP_DIALOG_STATUS,
+        payload: visible
+    }
+}
+
+export function setMapRegion(lat, long, latDelta, longDelta) {
+    if(latDelta === undefined) {
+        return {
+            type: ACTIONS.SET_MAP_REGION,
+            payload: {
+                latitude: lat,
+                longitude: long,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421
+            }
+        }
+    } else {
+        return {
+            type: ACTIONS.SET_MAP_REGION,
+            payload: {
+                latitude: lat,
+                longitude: long,
+                latitudeDelta: latDelta,
+                longitudeDelta: longDelta
+            }
         }
     }
 }

@@ -1,25 +1,19 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import { Dialog, Portal, Button, Divider, Caption, IconButton, Text, Colors } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setDialogStatus, setMapRegion } from '../actions';
+import { setMapDialogStatus, setMapRegion } from '../actions';
 import { listItemColor, convertDMS, dateParser } from '../misc/support_functions';
 
 
-const QuakeDialog = (props) => {
+const QuakeDialogMap = (props) => {
   const state = useSelector(state => state)
 
   const dispatch = useDispatch();
   const hideDialog = () => {
-    dispatch(setDialogStatus(false))
-  };
-  
-  const goToMap = (lat, long , jumpTo) => {
-    dispatch(setMapRegion(lat, long));
-    jumpTo('mapview');
-    dispatch(setDialogStatus(false));
+    dispatch(setMapDialogStatus(false))
   };
 
   const openLink = async (link) => {
@@ -30,13 +24,13 @@ const QuakeDialog = (props) => {
 
   return (
     <Portal>
-      <Dialog visible={state.isDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
+      <Dialog visible={state.isMapDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
         <Dialog.Title adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={styles.headerText}>
           {props.data.place}
         </Dialog.Title>
         <Divider/>
         <Dialog.Content style={styles.body}>
-          
+          {/* {console.log(props.region)} */}
           <View style={styles.rowStyle}>
             <View style={styles.rowIconStyle}>
               <IconButton icon="alert-circle" size={iconSize}/>
@@ -109,9 +103,6 @@ const QuakeDialog = (props) => {
         </Dialog.Content>
         <Divider/>
         <Dialog.Actions style={styles.actionBar}>
-          <Button icon="map-plus" onPress={() => goToMap(props.data.latitude, props.data.longitude, props.jumpTo)}>
-            View On Map
-          </Button>
           <Button onPress={hideDialog}>Close</Button>
         </Dialog.Actions>
       </Dialog>
@@ -119,7 +110,7 @@ const QuakeDialog = (props) => {
   );
 };
 
-export default QuakeDialog;
+export default QuakeDialogMap;
 
 const styles = StyleSheet.create({
   dialogStyle: {

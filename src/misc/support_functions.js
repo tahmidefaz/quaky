@@ -77,4 +77,4 @@ export const dateParser = (timestamp) => {
     const date = new Date(timestamp);
     // return date.toUTCString();
     return date.toUTCString().split(' ').slice(1).join(' ');
-  }
+}
