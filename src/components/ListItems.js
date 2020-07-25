@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { loadQuakeData, setDialogStatus, loadSelectedFeature } from '../actions';
 
-import { markerDescription } from '../misc/support_functions';
+import { markerDescription, calculateDistance } from '../misc/support_functions';
 import QuakeDialog from './QuakeDialog';
 
 
@@ -33,7 +33,7 @@ const ListItems = (props) => {
     
     const [selectedData, setSelectedData] = React.useState({});
 
-    const handleHook = (quakeData) => {
+    const handleItemPress = (quakeData) => {
         setSelectedData({
             mag: quakeData.properties.mag.toFixed(2),
             time: quakeData.properties.time,
@@ -41,7 +41,8 @@ const ListItems = (props) => {
             place: quakeData.properties.place,
             longitude: quakeData.geometry.coordinates[0],
             latitude: quakeData.geometry.coordinates[1],
-            depth: quakeData.geometry.coordinates[2].toFixed(2)
+            depth: quakeData.geometry.coordinates[2].toFixed(2),
+            distance: calculateDistance(quakeData.geometry.coordinates[1], quakeData.geometry.coordinates[0], state.currentLocation, "M")
         });
         dispatch(setDialogStatus(true));
     }
@@ -75,7 +76,7 @@ const ListItems = (props) => {
                         description={markerDescription(quake.properties.time)}
                         left={props => <List.Icon {...props} color={ listItemColor(quake.properties.mag) } icon="circle" />}
                         key={ quake.properties.code }
-                        onPress={() => handleHook(quake)}
+                        onPress={() => handleItemPress(quake)}
                         />
                     )
                 }

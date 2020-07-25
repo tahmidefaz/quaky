@@ -11,7 +11,8 @@ export const defaultQuakeData={
         place:"",
         longitude: 0,
         latitude: 0,
-        depth: 0
+        depth: 0,
+        distance: 0
      },
     test_obj: {}
 }

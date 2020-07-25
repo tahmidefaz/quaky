@@ -18,7 +18,7 @@ const renderMarkers = (state) => {
           title={info.properties.title}
           description={
               markerDescription(info.properties.time)+" "+
-              calculateDistance(info.geometry.coordinates[1],info.geometry.coordinates[0], state.currentLocation,"M")
+              calculateDistance(info.geometry.coordinates[1],info.geometry.coordinates[0], state.currentLocation,"M")+" away"
             }
           key = {info.properties.code}
         />
