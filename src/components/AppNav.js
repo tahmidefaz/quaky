@@ -13,7 +13,7 @@ const ListRoute = (props) => {
   // { console.log("ListRoute", props.jumpTo) }
   return (
     <View>
-      <Header title="List View"/>
+      <Header title="Earthquakes"/>
       <ListItems {...props} />
     </View>
   );
@@ -43,8 +43,8 @@ const AppNav = () => {
   },[]);
 
   const [routes] = React.useState([
-    { key: 'listview', title: 'List', icon: 'format-list-bulleted' },
-    { key: 'mapview', title: 'Map', icon: 'map' },
+    { key: 'listview', title: 'Quakes', icon: 'format-line-weight' },
+    { key: 'mapview', title: 'Map View', icon: 'map' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({

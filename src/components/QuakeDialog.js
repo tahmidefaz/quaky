@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Paragraph, Dialog, Portal, Button, Divider, Subheading, Caption, IconButton, Text } from 'react-native-paper';
+import { Paragraph, Dialog, Portal, Button, Divider, Subheading, Caption, IconButton, Text, Colors } from 'react-native-paper';
 import { StyleSheet, View, Linking } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setDialogStatus } from '../actions';
+import { listItemColor } from '../misc/support_functions';
 
 const dateParser = (timestamp) => {
   const date = new Date(timestamp);
@@ -15,24 +16,26 @@ const QuakeDialog = (props) => {
 
   const dispatch = useDispatch();
   const hideDialog = () => dispatch(setDialogStatus(false));
+  
+  const iconSize = 20
   // console.log(state.selected_feature)
   return (
     <Portal>
-      <Dialog visible={state.isDialogOpen} onDismiss={hideDialog} style={styles.header}>
-        <Dialog.Title>Earthquake Information</Dialog.Title>
+      <Dialog visible={state.isDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
+        <Dialog.Title style={styles.headerText}>Earthquake Information</Dialog.Title>
         <Divider/>
         <Dialog.Content style={styles.body}>
           
           <View style={styles.rowStyle}>
             <View style={styles.rowIconStyle}>
-              <IconButton icon="alert-circle" size={20}/>
+              <IconButton icon="alert-circle" size={iconSize}/>
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Magnitude</Text>
               <Caption>{ props.data.mag+" M" }</Caption>
             </View>
             <View style={styles.rowIconStyle}>
-              <IconButton icon="map" size={15}/>
+              <IconButton icon="office-building" size={iconSize}/>
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Depth</Text>
@@ -42,33 +45,33 @@ const QuakeDialog = (props) => {
 
           <View style={styles.rowStyle}>
             <View style={styles.rowIconStyle}>
-              <IconButton icon="map" size={15}/>
+              <IconButton icon="map-marker-radius" size={iconSize}/>
             </View>
             <View style={styles.rowItemStyle}>
-              <Text>Place</Text>
-              {/* <Caption>{ props.data.place }</Caption> */}
-              <Caption>Location Info</Caption>
+              <Text>Location</Text>
+              {/* <Caption style={styles.longTextSize}>{ props.data.place }</Caption> */}
+              <Caption style={styles.longTextSize}>Location Information</Caption>
             </View>
             <View style={styles.rowIconStyle}>
-              <IconButton icon="map" size={15}/>
-            </View>
-            <View style={styles.rowItemStyle}>
-              <Text>Time</Text>
-              {/* <Caption style={{flexWrap:'wrap'}}>{ dateParser(props.data.time) }</Caption> */}
-              <Caption style={{flexWrap:'wrap'}}>Placeholder</Caption>
-            </View>
-          </View>
-
-          <View style={styles.rowStyle}>
-            <View style={styles.rowIconStyle}>
-              <IconButton icon="map" size={15}/>
+              <IconButton icon="earth" size={iconSize}/>
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Distance</Text>
               <Caption>{ props.data.distance }</Caption>
             </View>
+          </View>
+
+          <View style={styles.rowStyle}>
             <View style={styles.rowIconStyle}>
-              <IconButton icon="map" size={15}/>
+              <IconButton icon="clock" size={iconSize}/>
+            </View>
+            <View style={styles.rowItemStyle}>
+              <Text>Time</Text>
+              {/* <Caption style={styles.longTextSize}>{ dateParser(props.data.time) }</Caption> */}
+              <Caption style={styles.longTextSize}>Placeholder Time</Caption>
+            </View>
+            <View style={styles.rowIconStyle}>
+              <IconButton icon="web" size={iconSize}/>
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Full Report</Text>
@@ -79,8 +82,8 @@ const QuakeDialog = (props) => {
         </Dialog.Content>
         <Divider/>
         <Dialog.Actions style={styles.actionBar}>
-          <Button icon="map">View On Map</Button>
-          <Button onPress={hideDialog}>Done</Button>
+          <Button icon="map-plus" onPress={() => console.log("pressed")}>View On Map</Button>
+          <Button onPress={hideDialog}>Close</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
@@ -90,13 +93,17 @@ const QuakeDialog = (props) => {
 export default QuakeDialog;
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: 'grey',
-    borderRadius: 10
+  dialogStyle: {
+    backgroundColor: Colors.yellow900,
+    borderRadius: 10,
+  },
+  headerText:{
+    color: 'white'
   },
   body: {
     backgroundColor: 'white',
-    paddingTop: "5%"
+    paddingTop: "5%",
+    paddingHorizontal:"2%"
   },
   rowStyle: {
     padding:"2%",
@@ -115,7 +122,11 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     color: 'blue'
   },
+  longTextSize: {
+    fontSize: 10
+  },
   actionBar: {
+    paddingEnd:"7%",
     backgroundColor: 'white',
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10

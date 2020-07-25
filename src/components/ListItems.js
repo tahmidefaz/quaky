@@ -5,19 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { loadQuakeData, setDialogStatus, loadSelectedFeature } from '../actions';
 
-import { markerDescription, calculateDistance } from '../misc/support_functions';
+import { markerDescription, calculateDistance, listItemColor } from '../misc/support_functions';
 import QuakeDialog from './QuakeDialog';
-
-
-const listItemColor = (mag) => {
-    if (mag > 5.5){
-        return Colors.red500;
-    } else if (mag >=4.5 && mag <= 5.5) {
-        return Colors.yellow900;
-    } else {
-        return Colors.green500;
-    }
-}
 
 
 const ListItems = (props) => {

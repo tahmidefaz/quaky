@@ -1,3 +1,6 @@
+import { Colors } from 'react-native-paper';
+
+
 export const updateFeature = (feature) => {
     return {
         ... feature,
@@ -48,4 +51,14 @@ export const calculateDistance = (lat1, lon1, currLocation, unit) => {
                 return (dist.toFixed(2) + " miles")
         }
   	}
+}
+
+export const listItemColor = (mag) => {
+    if (mag > 5.5){
+        return Colors.red500;
+    } else if (mag >=4.5 && mag <= 5.5) {
+        return Colors.yellow900;
+    } else {
+        return Colors.green500;
+    }
 }
