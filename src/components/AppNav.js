@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { BottomNavigation } from 'react-native-paper';
-import { loadQuakeData, loadCurrentLocation, loadTestAction } from '../actions';
+import { loadQuakeData } from '../actions';
 
 import Header from './Header';
 import ListItems from './ListItems';

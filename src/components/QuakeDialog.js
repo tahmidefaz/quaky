@@ -3,7 +3,7 @@ import { Paragraph, Dialog, Portal, Button, Divider, Subheading, Caption, IconBu
 import { StyleSheet, View, Linking } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setDialogStatus } from '../actions';
+import { setDialogStatus, setMapRegion } from '../actions';
 import { listItemColor } from '../misc/support_functions';
 
 const dateParser = (timestamp) => {
@@ -15,10 +15,19 @@ const QuakeDialog = (props) => {
   const state = useSelector(state => state)
 
   const dispatch = useDispatch();
-  const hideDialog = () => dispatch(setDialogStatus(false));
+  const hideDialog = () => {
+    dispatch(setMapRegion(state.currentLocation.latitude, state.currentLocation.longitude));
+    dispatch(setDialogStatus(false))
+  };
   
-  const iconSize = 20
-  // console.log(state.selected_feature)
+  const goToMap = (lat, long , jumpTo) => {
+    dispatch(setMapRegion(lat, long));
+    jumpTo('mapview');
+    dispatch(setDialogStatus(false));
+  };
+
+  const iconSize = 20;
+
   return (
     <Portal>
       <Dialog visible={state.isDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
@@ -76,13 +85,13 @@ const QuakeDialog = (props) => {
             <View style={styles.rowItemStyle}>
               <Text>Full Report</Text>
               <Caption style={styles.linkStyle} onPress={() => Linking.openURL(props.data.url)}>View Full Report</Caption>
-              { console.log("coords", props.data.latitude, props.data.longitude)}
+              {/* { console.log("coords", props.data.latitude, props.data.longitude)} */}
             </View>
           </View>
         </Dialog.Content>
         <Divider/>
         <Dialog.Actions style={styles.actionBar}>
-          <Button icon="map-plus" onPress={() => console.log("pressed")}>View On Map</Button>
+          <Button icon="map-plus" onPress={() => goToMap(props.data.latitude, props.data.longitude, props.jumpTo)}>View On Map</Button>
           <Button onPress={hideDialog}>Close</Button>
         </Dialog.Actions>
       </Dialog>

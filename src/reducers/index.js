@@ -4,16 +4,12 @@ export const defaultQuakeData={
     quakeData: [],
     currentLocation: {},
     isDialogOpen: false,
-    selected_feature: {
-        mag: 0,
-        time:"",
-        url:"",
-        place:"",
-        longitude: 0,
+    mapRegion: {
         latitude: 0,
-        depth: 0,
-        distance: 0
-     },
+        longitude: 0,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+    },
     test_obj: {}
 }
 
@@ -34,10 +30,10 @@ export const quakeDataReducer = (state = defaultQuakeData, action) => {
                 ...state,
                 isDialogOpen: action.payload
             }
-        case ACTIONS.SELECTED_FEATURE:
+        case ACTIONS.SET_MAP_REGION:
             return {
                 ...state,
-                selected_feature: action.payload
+                mapRegion: action.payload
             }
         case ACTIONS.TEST_ACTION:
             return {

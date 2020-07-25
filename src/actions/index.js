@@ -34,10 +34,15 @@ export function setDialogStatus(visible) {
     }
 }
 
-export function loadSelectedFeature(feature) {
+export function setMapRegion(lat, long) {
     return {
-        type: ACTIONS.SELECTED_FEATURE,
-        payload: { ...feature }
+        type: ACTIONS.SET_MAP_REGION,
+        payload: {
+            latitude: lat,
+            longitude: long,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+        }
     }
 }
 

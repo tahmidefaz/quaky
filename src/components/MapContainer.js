@@ -27,7 +27,7 @@ const renderMarkers = (state) => {
 
 const MapContainer = () => {
     const state = useSelector(state => state);
-    let mapRegion = state.currentLocation;
+    let mapRegion = state.mapRegion;
     return(
         <MapView
               style={styles.map}

@@ -70,7 +70,7 @@ const ListItems = (props) => {
                     )
                 }
             </List.Section>
-            <QuakeDialog data={selectedData} />
+            <QuakeDialog data={selectedData} jumpTo={props.jumpTo}/>
         </ScrollView>
     )
 };

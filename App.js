@@ -6,7 +6,7 @@ import {Provider as StoreProvider} from 'react-redux';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import AppNav from './src/components/AppNav';
 
-import { loadCurrentLocation } from './src/actions';
+import { loadCurrentLocation, setMapRegion } from './src/actions';
 import store from './src/store/configureStore';
 
 const theme = {
@@ -32,20 +32,24 @@ export default function App() {
       let { status } = await Location.requestPermissionsAsync()
       if (status !== 'granted') {
         store.dispatch(loadCurrentLocation(defaultLocation));
+        store.dispatch(setMapRegion(defaultLocation.latitude, defaultLocation.longitude));
       }
 
-      let location = await Location.getCurrentPositionAsync({})
-      .then((location)=>
+      await Location.getCurrentPositionAsync({})
+      .then((location)=> {
         store.dispatch(loadCurrentLocation({
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          })
-        ))
-      .catch((error)=>
-        store.dispatch(loadCurrentLocation(defaultLocation))
-      );
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }));
+        store.dispatch(setMapRegion(location.coords.latitude, location.coords.longitude));
+      }
+      )
+      .catch((error)=> {
+        store.dispatch(loadCurrentLocation(defaultLocation));
+        store.dispatch(setMapRegion(defaultLocation.latitude, defaultLocation.longitude));
+      });
     })();
   });
 
