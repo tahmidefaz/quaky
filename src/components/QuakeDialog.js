@@ -22,7 +22,7 @@ const QuakeDialog = (props) => {
   return (
     <Portal>
       <Dialog visible={state.isDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
-        <Dialog.Title style={styles.headerText}>Earthquake Information</Dialog.Title>
+        <Dialog.Title style={styles.headerText}>{props.data.place}</Dialog.Title>
         <Divider/>
         <Dialog.Content style={styles.body}>
           
@@ -39,7 +39,7 @@ const QuakeDialog = (props) => {
             </View>
             <View style={styles.rowItemStyle}>
               <Text>Depth</Text>
-              <Caption>{ props.data.depth+" km" }</Caption>
+              <Caption>{ (props.data.depth*0.623171).toFixed(2)+" miles" }</Caption>
             </View>
           </View>
 
