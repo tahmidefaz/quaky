@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Dialog, Portal, Button, Divider, Caption, IconButton, Text, Colors } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
@@ -47,7 +47,7 @@ const QuakeDialogMap = (props) => {
             <View style={styles.rowItemStyle}>
               <Text>Depth</Text>
               <Caption adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling>
-                { (props.data.depth*0.623171).toFixed(2)+" miles" }
+                { (props.data.depth*0.623171).toFixed(2)+" mi" }
               </Caption>
             </View>
           </View>

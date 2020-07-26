@@ -36,9 +36,9 @@ export const calculateDistance = (lat1, lon1, currLocation, unit) => {
             case "K":
                 return ((dist * 1.609344).toFixed(2) + " km")
             case "N":
-                return ((dist * 0.8684).toFixed(2) + " Nmiles")
+                return ((dist * 0.8684).toFixed(2) + " N mi")
             default:
-                return (dist.toFixed(2) + " miles")
+                return (dist.toFixed(2) + " mi")
         }
   	}
 }

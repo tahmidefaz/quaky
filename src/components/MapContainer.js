@@ -1,5 +1,5 @@
-import React from 'react';
-import { Dimensions,StyleSheet,View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Dimensions, StyleSheet, View, BackHandler } from 'react-native';
 import MapView from 'react-native-maps';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,7 +12,7 @@ import QuakeDialogMap from './QuakeDialogMap';
 
 let updatedRegion = {};
 
-const MapContainer = () => {
+const MapContainer = (props) => {
   const state = useSelector(state => state);
   let mapRegion = state.mapRegion;
 
@@ -37,6 +37,19 @@ const MapContainer = () => {
     dispatch(setMapRegion(currentRegion.latitude, currentRegion.longitude, currentRegion.latitudeDelta, currentRegion.longitudeDelta))
     dispatch(setMapDialogStatus(true));
   }
+
+  const backAction = () => {
+    props.jumpTo('listview');
+    return true;
+  }
+  
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAction);
+
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", backAction);
+    };
+  }, []);
 
   return(
     <View>
