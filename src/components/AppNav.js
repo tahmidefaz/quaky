@@ -13,7 +13,7 @@ const ListRoute = (props) => {
   // { console.log("ListRoute", props.jumpTo) }
   return (
     <View>
-      <Header title="Earthquakes"/>
+      <Header title="Recent Earthquakes" screen="listview"/>
       <ListItems {...props} />
     </View>
   );
@@ -23,7 +23,7 @@ const ListRoute = (props) => {
 const MapRoute = () => {
   return (
     <View>
-      <Header title="Map View" />
+      <Header title="Map View" screen="mapview"/>
       <MapContainer/>
     </View>
   );

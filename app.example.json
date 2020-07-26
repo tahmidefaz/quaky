@@ -9,7 +9,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon2.png",
+    "icon": "./assets/quakey_icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

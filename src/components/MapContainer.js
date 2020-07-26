@@ -34,7 +34,7 @@ const MapContainer = () => {
         depth: quakeData.geometry.coordinates[2].toFixed(2),
         distance: calculateDistance(quakeData.geometry.coordinates[1], quakeData.geometry.coordinates[0], state.currentLocation, "M")
     });
-    dispatch(setMapRegion(currentRegion.latitude, currentRegion.longitude, currentRegion.latitudeDelta, currentRegion.longitudeDelta))
+    dispatch(setMapRegion(currentRegion.latitude, currentRegion.longitude, currentRegion.latitudeDelta, currentRegion.longitudeDelta));
     dispatch(setMapDialogStatus(true));
   }
 
@@ -42,6 +42,10 @@ const MapContainer = () => {
     arr = []
     coordinate_array.map((coordinate) => arr.push({latitude:coordinate[1], longitude: coordinate[0]}))
     return arr
+  }
+  
+  const addFaultLines = (currentRegion) => {
+      dispatch(setMapRegion(currentRegion.latitude, currentRegion.longitude, currentRegion.latitudeDelta, currentRegion.longitudeDelta));
   }
 
   return(
@@ -55,7 +59,7 @@ const MapContainer = () => {
             onRegionChangeComplete={(region) => regionChangeUpdate(region)}
             >
             {
-              fault_data.features.map((feature, index) => 
+              state.showFaultLines && fault_data.features.map((feature, index) => 
                 <Polyline
                   coordinates={coordinate_coverter(feature.geometry.coordinates)}
                   strokeColor='#ffffff'

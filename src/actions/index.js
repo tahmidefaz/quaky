@@ -65,6 +65,13 @@ export function setMapRegion(lat, long, latDelta, longDelta) {
     }
 }
 
+export function showFaultLines(visible) {
+    return {
+        type: ACTIONS.SHOW_FAULT_LINES,
+        payload: visible
+    }
+}
+
 export function loadTestAction() {
     return {
         type: ACTIONS.TEST_ACTION,
