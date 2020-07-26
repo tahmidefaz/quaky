@@ -20,11 +20,11 @@ const ListRoute = (props) => {
 };
 
 
-const MapRoute = (props) => {
+const MapRoute = () => {
   return (
     <View>
       <Header title="Map View" />
-      <MapContainer {...props}/>
+      <MapContainer/>
     </View>
   );
 };
