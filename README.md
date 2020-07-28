@@ -1,7 +1,7 @@
 # Quakey
 A cross-platform mobile app for real-time earthquake information. 
 Developed using the [React Native framework](https://facebook.github.io/react-native/) with the [expo](https://expo.io/) toolchain.
-Compatible with the ios and the android platform. **App is currently awaiting review for Play Store release.**. Quakey is currently stable **Version 1.x**
+Compatible with the ios and the android platform. **App is currently awaiting review for Play Store release.**. Quakey is currently at stable **Version 1.x**
 
 ## General Information
 Quakey currently has two screens. One that provides the earthquake data in list view and another that provides the data in map view. At the moment, Quakey uses the 2.5+ daily earthquakes api endpoint from USGS. This endpoint provides information on US earthquakes that are at least 2.5 in magnitude and on worlwide earthquakes that are at least 4.5 in magnitude.
