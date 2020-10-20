@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setMapDialogStatus, setMapRegion } from '../actions';
+import { setMapDialogStatus, setMapRegion } from '../redux/actions';
 import { listItemColor, convertDMS, dateParser } from '../misc/support_functions';
 
 

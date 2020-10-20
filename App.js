@@ -6,8 +6,8 @@ import {Provider as StoreProvider} from 'react-redux';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import AppNav from './src/components/AppNav';
 
-import { loadCurrentLocation, setMapRegion } from './src/actions';
-import store from './src/store/configureStore';
+import { loadCurrentLocation, setMapRegion } from './src/redux/actions';
+import store from './src/redux/store/configureStore';
 
 const theme = {
   ...DefaultTheme,

@@ -4,7 +4,7 @@ import MapView, { Polyline, Marker } from 'react-native-maps';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { mapstyle } from './mapstyle';
-import { setMapDialogStatus, setMapRegion } from '../actions';
+import { setMapDialogStatus, setMapRegion } from '../redux/actions';
 import { markerDescription, calculateDistance } from '../misc/support_functions';
 import QuakeDialogMap from './QuakeDialogMap';
 

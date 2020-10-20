@@ -3,7 +3,7 @@ import { Appbar, Menu, Button, Checkbox } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import { useDispatch } from 'react-redux';
 
-import { showFaultLines } from '../actions'
+import { showFaultLines } from '../redux/actions'
 
 const Header = (props) => {
     const [visible, setVisible] = React.useState(false);
