@@ -16,7 +16,7 @@
     "react-axios": "^2.0.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-maps": "0.27.1",
-    "react-native-paper": "^4.0.1",
+    "react-native-paper": "^4.5.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
