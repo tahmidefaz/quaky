@@ -11,7 +11,7 @@
     "orientation": "portrait",
     "icon": "./assets/quakey_icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/quakey-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
