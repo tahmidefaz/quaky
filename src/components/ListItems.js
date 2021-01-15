@@ -3,7 +3,7 @@ import { ScrollView, RefreshControl } from 'react-native';
 import { List } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { loadQuakeData, setDialogStatus } from '../actions';
+import { loadQuakeData, setDialogStatus } from '../redux/actions';
 
 import { markerDescription, calculateDistance, listItemColor } from '../misc/support_functions';
 import QuakeDialog from './QuakeDialog';

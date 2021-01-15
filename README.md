@@ -1,7 +1,9 @@
 # Quakey
 A cross-platform mobile app for real-time earthquake information. 
 Developed using the [React Native framework](https://facebook.github.io/react-native/) with the [expo](https://expo.io/) toolchain.
-Compatible with the ios and the android platform. **App is currently awaiting review for Play Store release.**. Quakey is currently at stable **Version 1.x**
+Compatible with the ios and the android platform. Quakey is currently at stable **Version 1.x**
+
+[![Play Store Button](../assets/google-play-badge-mini.png?raw=true)](https://play.google.com/store/apps/details?id=com.quakey.android)
 
 ## General Information
 Quakey currently has two screens. One that provides the earthquake data in list view and another that provides the data in map view. At the moment, Quakey uses the 2.5+ daily earthquakes api endpoint from USGS. This endpoint provides information on US earthquakes that are at least 2.5 in magnitude and on worlwide earthquakes that are at least 4.5 in magnitude.
@@ -43,6 +45,7 @@ viewing the location of the earthquakes on a map
 3. Clone or download this repo
 4. On your computer, navigate into the repo using the terminal
 5. Rename the file ``app.example.json`` to ``app.json``
-5. Run the command ``expo start``
+6. Run ``npm install``
+7. Run ``expo start``
 
 *Note: checkout [expo](https://expo.io/) website for setup troubleshooting*

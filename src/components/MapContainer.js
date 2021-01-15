@@ -4,8 +4,8 @@ import MapView, { Polyline, Marker } from 'react-native-maps';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { mapstyle } from './mapstyle';
-import { setMapDialogStatus, setMapRegion } from '../actions';
-import { markerDescription, calculateDistance } from '../misc/support_functions';
+import { setMapDialogStatus, setMapRegion } from '../redux/actions';
+import { markerDescription, calculateDistance, markerColor } from '../misc/support_functions';
 import QuakeDialogMap from './QuakeDialogMap';
 
 import fault_data from '../misc/fault_data';
@@ -44,9 +44,6 @@ const MapContainer = () => {
     return arr
   }
   
-  const addFaultLines = (currentRegion) => {
-      dispatch(setMapRegion(currentRegion.latitude, currentRegion.longitude, currentRegion.latitudeDelta, currentRegion.longitudeDelta));
-  }
 
   return(
     <View>
@@ -71,6 +68,7 @@ const MapContainer = () => {
             {
               state.quakeData.map(info =>
                 <Marker
+                  pinColor={markerColor(info.properties.mag)}
                   coordinate={{
                     latitude:  info.geometry.coordinates[1],
                     longitude: info.geometry.coordinates[0],
