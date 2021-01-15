@@ -7,9 +7,9 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "^38.0.10",
-    "expo-cli": "^3.22.3",
+    "expo-cli": "^3.28.6",
     "expo-status-bar": "^1.0.0",
     "expo-web-browser": "~8.3.1",
     "react": "16.11.0",

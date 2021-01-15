@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Appbar, Menu, Button, Checkbox } from 'react-native-paper';
+import { Appbar, Menu, Checkbox } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import { useDispatch } from 'react-redux';
 
