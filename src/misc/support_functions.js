@@ -53,6 +53,16 @@ export const listItemColor = (mag) => {
     }
 }
 
+export const markerColor = (mag) => {
+    if (mag > 5.5){
+        return 'red'
+    } else if (mag >=4.5 && mag <= 5.5) {
+        return 'yellow';
+    } else {
+        return 'green';
+    }
+}
+
 const toDegreesMinutesAndSeconds = (coordinate) => {
     const absolute = Math.abs(coordinate);
     const degrees = Math.floor(absolute);
