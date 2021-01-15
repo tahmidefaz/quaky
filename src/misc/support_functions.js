@@ -57,7 +57,7 @@ export const markerColor = (mag) => {
     if (mag > 5.5){
         return 'red'
     } else if (mag >=4.5 && mag <= 5.5) {
-        return 'yellow';
+        return 'orange';
     } else {
         return 'green';
     }
