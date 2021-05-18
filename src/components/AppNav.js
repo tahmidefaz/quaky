@@ -7,6 +7,7 @@ import { loadQuakeData } from '../redux/actions';
 import Header from './Header';
 import ListItems from './ListItems';
 import MapContainer from './MapContainer';
+import SearchView from './SearchView';
 
 
 const ListRoute = (props) => {
@@ -29,6 +30,15 @@ const MapRoute = () => {
   );
 };
 
+const SearchRoute = (props) => {
+  return (
+    <View>
+      <Header title="Search Earthquakes" screen="searchview"/>
+      <SearchView {...props} />
+    </View>
+  )
+}
+
 const AppNav = () => {
   const [index, setIndex] = React.useState(0);
 
@@ -45,11 +55,13 @@ const AppNav = () => {
   const [routes] = React.useState([
     { key: 'listview', title: 'Quakes', icon: 'format-line-weight' },
     { key: 'mapview', title: 'Map View', icon: 'map' },
+    { key: 'searchview', title: 'Search', icon: 'history'},
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
     listview: ListRoute,
     mapview: MapRoute,
+    searchview: SearchRoute,
   });
 
   return (
