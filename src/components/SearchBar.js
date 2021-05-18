@@ -1,20 +1,31 @@
 import React,{ useState } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { Button, TextInput, Paragraph } from 'react-native-paper';
 import { TextInputMask } from 'react-native-masked-text'
 
+import { loadQuakeSearchData } from '../redux/actions';
 
 const SearchBar = () => {
-    const [startDateValue, setStartDateValue] = useState('Start Date')
-    const [endDateValue, setEndDateValue] = useState('End Date')
-    const [magValue, setMagValue] = useState('00.00')
+    const [startDateValue, setStartDateValue] = useState('2021-05-17')
+    const [endDateValue, setEndDateValue] = useState('2021-05-18')
+    const [magValue, setMagValue] = useState('02.50')
+    const [filterInfo, setFilterInfo] = useState([startDateValue,endDateValue,magValue])
+
+    const dispatch = useDispatch();
+
+    const getFilteredQuakeData = () => {
+        dispatch(loadQuakeSearchData(startDateValue,endDateValue,magValue));
+        setFilterInfo([startDateValue,endDateValue,magValue]);
+    }
+
     return (
         <View style={styles.filterBarStyle}>
             <View style={styles.rowStyle}>
                 <TextInputMask
                     type={'datetime'}
                     options={{
-                        format: 'MM/DD/YYYY'
+                        format: 'YYYY-MM-DD'
                     }}
                     value={startDateValue}
                     style={{flex:1,height:30,margin:'2%',paddingLeft:10,fontSize:16,borderWidth:1,borderColor:'grey',borderRadius:2}}
@@ -25,7 +36,7 @@ const SearchBar = () => {
                 <TextInputMask
                     type={'datetime'}
                     options={{
-                        format: 'MM/DD/YYYY'
+                        format: 'YYYY-MM-DD'
                     }}
                     value={endDateValue}
                     style={{flex:1,height:30,margin:'2%',paddingLeft:10,fontSize:16,borderWidth:1,borderColor:'grey',borderRadius:2}}
@@ -56,11 +67,13 @@ const SearchBar = () => {
                     mode="outlined" 
                     icon="arrow-right-circle" 
                     style={{flex:1, width:10, height:30, marginTop: 7 }} 
-                    compact="true">
-                        Search
+                    compact="true"
+                    onPress={()=>getFilteredQuakeData()}
+                >
+                    Search
                 </Button>
             </View>
-            <Paragraph adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={{padding:"1%"}}>Showing results from mm/dd/yyyy to mm/dd/yyyy for magnitude 00.0 or higher </Paragraph>
+            <Paragraph adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={{paddingLeft: 10}}>{`Showing results from ${filterInfo[0]} to ${filterInfo[1]} for magnitude ${filterInfo[2]} or higher`}</Paragraph>
         </View>
     );
 };

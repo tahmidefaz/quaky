@@ -1,31 +1,27 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { List } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 
-import { listItemColor } from '../misc/support_functions';;
+import { markerDescription, listItemColor } from '../misc/support_functions';;
 
 const SearchList = () => {
+    const state = useSelector(state => state);
+
     return(
         <ScrollView>
             <List.Section>
-                <List.Item
-                    title="This is a title"
-                    description="description..."
-                    left={props => <List.Icon {...props} color={ listItemColor(7.5) } icon="circle" />}
-                    key='934900'
-                />
-                <List.Item
-                    title="This is a title"
-                    description="description..."
-                    left={props => <List.Icon {...props} color={ listItemColor(4.7) } icon="circle" />}
-                    key='2342'
-                />
-                <List.Item
-                    title="This is a title"
-                    description="description..."
-                    left={props => <List.Icon {...props} color={ listItemColor(2.5) } icon="circle" />}
-                    key='998'
-                />
+                {
+                    state.quakeSearchData.map(quake =>
+                        <List.Item
+                        title={quake.properties.title}
+                        description={markerDescription(quake.properties.time)}
+                        left={props => <List.Icon {...props} color={ listItemColor(quake.properties.mag) } icon="circle" />}
+                        key={ quake.properties.code }
+                        // onPress={() => handleItemPress(quake)}
+                        />
+                    )
+                }
             </List.Section>
         </ScrollView>
     );

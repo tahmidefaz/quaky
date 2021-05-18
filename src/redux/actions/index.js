@@ -19,6 +19,23 @@ function quakeData(features) {
     }
 }
 
+export function loadQuakeSearchData(startDate,endDate,mag) {
+    return dispatch => {
+        return axios.get(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${startDate}&endtime=${endDate}&minmagnitude=${mag}`)
+        .then(response => {
+            dispatch(quakeSearchData(response.data.features));
+        })
+        .catch(err => dispatch(quakeSearchData(response.data.err)))
+    }
+}
+
+function quakeSearchData(features) {
+    return {
+        type: ACTIONS.FETCH_QUAKE_SEARCH_DATA,
+        payload: features
+    }
+}
+
 
 export function loadCurrentLocation(currentLocation) {
     return {

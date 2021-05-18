@@ -12,6 +12,7 @@ export const defaultQuakeData={
         longitudeDelta: 0.0421
     },
     showFaultLines: false,
+    quakeSearchData: [],
     test_obj: {}
 }
 
@@ -46,6 +47,11 @@ export const quakeDataReducer = (state = defaultQuakeData, action) => {
             return {
                 ...state,
                 showFaultLines: action.payload
+            }
+        case ACTIONS.FETCH_QUAKE_SEARCH_DATA:
+            return {
+                ...state,
+                quakeSearchData: action.payload
             }
         case ACTIONS.TEST_ACTION:
             return {
