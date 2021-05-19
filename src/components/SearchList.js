@@ -3,10 +3,10 @@ import { ScrollView } from 'react-native';
 import { List } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setMapDialogStatus } from '../redux/actions';
+import { setSearchDialogStatus } from '../redux/actions';
 
 import { listItemColor, dateParser, calculateDistance } from '../misc/support_functions';
-import QuakeDialogMap from './QuakeDialogMap';
+import QuakeDialogSearch from './QuakeDialogSearch';
 
 const SearchList = () => {
     const state = useSelector(state => state);
@@ -25,7 +25,7 @@ const SearchList = () => {
             depth: quakeData.geometry.coordinates[2] ? quakeData.geometry.coordinates[2].toFixed(2) : null,
             distance: calculateDistance(quakeData.geometry.coordinates[1], quakeData.geometry.coordinates[0], state.currentLocation, "M")
         });
-        dispatch(setMapDialogStatus(true));
+        dispatch(setSearchDialogStatus(true));
     }
 
     return(
@@ -43,7 +43,7 @@ const SearchList = () => {
                     )
                 }
             </List.Section>
-            <QuakeDialogMap data={selectedData}/>
+            <QuakeDialogSearch data={selectedData}/>
         </ScrollView>
     );
 };

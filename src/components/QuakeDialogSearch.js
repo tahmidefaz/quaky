@@ -4,16 +4,16 @@ import { StyleSheet, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setMapDialogStatus } from '../redux/actions';
+import { setSearchDialogStatus } from '../redux/actions';
 import { listItemColor, convertDMS, dateParser } from '../misc/support_functions';
 
 
-const QuakeDialogMap = (props) => {
+const QuakeDialogSearch = (props) => {
   const state = useSelector(state => state)
 
   const dispatch = useDispatch();
   const hideDialog = () => {
-    dispatch(setMapDialogStatus(false))
+    dispatch(setSearchDialogStatus(false))
   };
 
   const openLink = async (link) => {
@@ -24,7 +24,7 @@ const QuakeDialogMap = (props) => {
 
   return (
     <Portal>
-      <Dialog visible={state.isMapDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
+      <Dialog visible={state.isSearchDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
         <Dialog.Title adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={styles.headerText}>
           {props.data.place}
         </Dialog.Title>
@@ -110,7 +110,7 @@ const QuakeDialogMap = (props) => {
   );
 };
 
-export default QuakeDialogMap;
+export default QuakeDialogSearch;
 
 const styles = StyleSheet.create({
   dialogStyle: {

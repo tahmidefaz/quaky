@@ -5,6 +5,7 @@ export const defaultQuakeData={
     currentLocation: {},
     isDialogOpen: false,
     isMapDialogOpen: false,
+    isSearchDialogOpen: false,
     mapRegion: {
         latitude: 0,
         longitude: 0,
@@ -37,6 +38,11 @@ export const quakeDataReducer = (state = defaultQuakeData, action) => {
             return {
                 ...state,
                 isMapDialogOpen: action.payload
+            }
+        case ACTIONS.SEARCH_DIALOG_STATUS:
+            return {
+                ...state,
+                isSearchDialogOpen: action.payload
             }
         case ACTIONS.SET_MAP_REGION:
             return {
