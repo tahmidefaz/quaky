@@ -7,9 +7,9 @@ import { TextInputMask } from 'react-native-masked-text'
 import { loadQuakeSearchData } from '../redux/actions';
 
 const SearchBar = () => {
-    const [startDateValue, setStartDateValue] = useState('2021-05-17')
-    const [endDateValue, setEndDateValue] = useState('2021-05-18')
-    const [magValue, setMagValue] = useState('02.50')
+    const [startDateValue, setStartDateValue] = useState('')
+    const [endDateValue, setEndDateValue] = useState('')
+    const [magValue, setMagValue] = useState('')
     const [filterInfo, setFilterInfo] = useState([startDateValue,endDateValue,magValue])
 
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const SearchBar = () => {
                     label="Start Date"
                     placeholder="YYYY-MM-DD"
                     mode="outlined"
-                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:10, paddingLeft:8}}
+                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:10, paddingLeft:8, paddingTop:2}}
                     onChangeText={text => {
                         setStartDateValue(text)
                     }}
@@ -44,7 +44,7 @@ const SearchBar = () => {
                     label="End Date"
                     mode="outlined"
                     placeholder="YYYY-MM-DD"
-                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:10, paddingLeft:8}}
+                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:10, paddingLeft:8, paddingTop:2}}
                     onChangeText={text => {
                         setEndDateValue(text)
                     }}
@@ -89,7 +89,11 @@ const SearchBar = () => {
                     Search
                 </Button>
             </View>
-            <Paragraph adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={{paddingLeft: 10}}>{`Showing results from ${filterInfo[0]} to ${filterInfo[1]} for magnitude ${filterInfo[2]} or higher`}</Paragraph>
+            {
+                startDateValue !== '' && endDateValue !== '' && magValue !== '' ?
+                    <Paragraph adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={{paddingLeft: 12}}>{`Showing results from ${filterInfo[0]} to ${filterInfo[1]} for magnitude ${filterInfo[2]} or higher`}</Paragraph>
+                : <Paragraph adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={{paddingLeft: 12, fontSize: 10}}>Provide all the search criteria and press search to look up earthquakes</Paragraph>
+            }
         </View>
     );
 };

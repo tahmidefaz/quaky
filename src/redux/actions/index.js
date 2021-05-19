@@ -58,6 +58,13 @@ export function setMapDialogStatus(visible) {
     }
 }
 
+export function setSearchDialogStatus(visible) {
+    return {
+        type: ACTIONS.SEARCH_DIALOG_STATUS,
+        payload: visible
+    }
+}
+
 export function setMapRegion(lat, long, latDelta, longDelta) {
     if(latDelta === undefined) {
         return {
