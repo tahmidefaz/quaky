@@ -9,6 +9,7 @@ const SearchView = () => {
         <View>
             <SearchBar/>
             <SearchList/>
+            {/* <View style={{marginTop:30}}></View> */}
         </View>
     )
 };

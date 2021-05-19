@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as ACTIONS from '../constants';
 
+import { incrementDate } from '../../misc/support_functions';
+
 
 export function loadQuakeData() {
     return dispatch => {
@@ -20,6 +22,7 @@ function quakeData(features) {
 }
 
 export function loadQuakeSearchData(startDate,endDate,mag) {
+    endDate=incrementDate(endDate);
     return dispatch => {
         return axios.get(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${startDate}&endtime=${endDate}&minmagnitude=${mag}`)
         .then(response => {

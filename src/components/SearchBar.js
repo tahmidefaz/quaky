@@ -90,7 +90,7 @@ const SearchBar = () => {
                 </Button>
             </View>
             {
-                startDateValue !== '' && endDateValue !== '' && magValue !== '' ?
+                filterInfo.some(item => item !== '') ?
                     <Paragraph adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={{paddingLeft: 12}}>{`Showing results from ${filterInfo[0]} to ${filterInfo[1]} for magnitude ${filterInfo[2]} or higher`}</Paragraph>
                 : <Paragraph adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={{paddingLeft: 12, fontSize: 10}}>Provide all the search criteria and press search to look up earthquakes</Paragraph>
             }
