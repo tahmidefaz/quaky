@@ -5,7 +5,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setDialogStatus, setMapRegion } from '../redux/actions';
-import { listItemColor, convertDMS, dateParser } from '../misc/support_functions';
+import { listItemColor, convertDMS, dateParser, formatTitle } from '../misc/support_functions';
 
 
 const QuakeDialog = (props) => {
@@ -32,7 +32,7 @@ const QuakeDialog = (props) => {
     <Portal>
       <Dialog visible={state.isDialogOpen} onDismiss={hideDialog} style={{...styles.dialogStyle, backgroundColor: listItemColor(props.data.mag)}}>
         <Dialog.Title adjustsFontSizeToFit minimumFontScale={.5} numberOfLines={1} allowFontScaling style={styles.headerText}>
-          {props.data.place}
+          {formatTitle(props.data.place)}
         </Dialog.Title>
         <Divider/>
         <Dialog.Content style={styles.body}>

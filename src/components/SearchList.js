@@ -5,8 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { setSearchDialogStatus } from '../redux/actions';
 
-import { listItemColor, dateParser, calculateDistance } from '../misc/support_functions';
+import { listItemColor, dateParser, calculateDistance, formatTitle } from '../misc/support_functions';
 import QuakeDialogSearch from './QuakeDialogSearch';
+import ListIcon from './ListIcon';
+
 
 const SearchList = () => {
     const state = useSelector(state => state);
@@ -29,14 +31,14 @@ const SearchList = () => {
     }
 
     return(
-        <ScrollView>
+        <ScrollView style={{height:'72%'}}>
             <List.Section>
                 {
                     state.quakeSearchData.map(quake =>
                         <List.Item
-                            title={quake.properties.title}
+                            title={formatTitle(quake.properties.place)}
                             description={dateParser(quake.properties.time)}
-                            left={props => <List.Icon {...props} color={ listItemColor(quake.properties.mag) } icon="circle" />}
+                            left={props => <ListIcon {...props} iconColor={listItemColor(quake.properties.mag)} quakeMag={quake.properties.mag.toFixed(1)}/>}
                             key={ quake.properties.code }
                             onPress={() => handleItemPress(quake)}
                         />

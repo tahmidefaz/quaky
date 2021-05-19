@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { loadQuakeData, setDialogStatus } from '../redux/actions';
 
-import { markerDescription, calculateDistance, listItemColor } from '../misc/support_functions';
+import { markerDescription, calculateDistance, listItemColor, formatTitle } from '../misc/support_functions';
 import QuakeDialog from './QuakeDialog';
+import ListIcon from './ListIcon';
 
 
 const ListItems = (props) => {
@@ -46,9 +47,9 @@ const ListItems = (props) => {
                 {
                     state.quakeData.map(quake =>
                         <List.Item
-                        title={quake.properties.title}
+                        title={formatTitle(quake.properties.place)}
                         description={markerDescription(quake.properties.time)}
-                        left={props => <List.Icon {...props} color={ listItemColor(quake.properties.mag) } icon="circle" />}
+                        left={props => <ListIcon {...props} iconColor={listItemColor(quake.properties.mag)} quakeMag={quake.properties.mag.toFixed(1)}/>}
                         key={ quake.properties.code }
                         onPress={() => handleItemPress(quake)}
                         />

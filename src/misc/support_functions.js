@@ -88,3 +88,16 @@ export const dateParser = (timestamp) => {
     // return date.toUTCString();
     return date.toUTCString().split(' ').slice(1).join(' ');
 }
+
+export const formatTitle = (string) => {
+    if(string){
+        return string[0].toUpperCase() + string.slice(1);
+    }
+}
+
+export const incrementDate = (dateString) => {
+    const dateObj = new Date(dateString);
+    dateObj.setDate(dateObj.getDate() + 1);
+    dateString = `${dateObj.getUTCFullYear()}-${dateObj.getUTCMonth()+1}-${dateObj.getUTCDate()}`;
+    return dateString;
+}
