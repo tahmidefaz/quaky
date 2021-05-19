@@ -22,51 +22,67 @@ const SearchBar = () => {
     return (
         <View style={styles.filterBarStyle}>
             <View style={styles.rowStyle}>
-                <TextInputMask
-                    type={'datetime'}
-                    options={{
-                        format: 'YYYY-MM-DD'
-                    }}
-                    value={startDateValue}
-                    style={{flex:1,height:30,margin:'2%',paddingLeft:10,fontSize:16,borderWidth:1,borderColor:'grey',borderRadius:2}}
+                <TextInput
+                    label="Start Date"
+                    placeholder="YYYY-MM-DD"
+                    mode="outlined"
+                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:10, paddingLeft:8}}
                     onChangeText={text => {
                         setStartDateValue(text)
                     }}
+                    render={props =>
+                        <TextInputMask
+                            {...props}
+                            type={'datetime'}
+                            options={{
+                                format: 'YYYY-MM-DD'
+                            }}
+                        />
+                    }
                 />
-                <TextInputMask
-                    type={'datetime'}
-                    options={{
-                        format: 'YYYY-MM-DD'
-                    }}
-                    value={endDateValue}
-                    style={{flex:1,height:30,margin:'2%',paddingLeft:10,fontSize:16,borderWidth:1,borderColor:'grey',borderRadius:2}}
+                <TextInput
+                    label="End Date"
+                    mode="outlined"
+                    placeholder="YYYY-MM-DD"
+                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:10, paddingLeft:8}}
                     onChangeText={text => {
                         setEndDateValue(text)
                     }}
+                    render={props =>
+                        <TextInputMask
+                            {...props}
+                            type={'datetime'}
+                            options={{
+                                format: 'YYYY-MM-DD'
+                            }}
+                        />
+                    }
                 />
             </View>
             <View style={styles.rowStyle}>
-                {/* <TextInput
+                <TextInput
                     label="Magnitude"
                     mode="outlined"
-                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:19}}
-                    dense="true"
-                /> */}
-                <TextInputMask
-                    type={'custom'}
-                    options={{
-                        mask: '99.99'
-                    }}
-                    value={magValue}
-                    style={{flex:1,height:30,margin:'2%', paddingLeft:10, marginRight:25, fontSize:16,borderWidth:1,borderColor:'grey',borderRadius:2}}
+                    placeholder="x.xx"
+                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:18, paddingLeft:8}}
                     onChangeText={text => {
                         setMagValue(text)
                     }}
+                    render={props =>
+                        <TextInputMask
+                            {...props}
+                            type={'custom'}
+                            options={{
+                                mask: '9.99'
+                            }}
+                        />
+                    }
                 />
-                <Button 
-                    mode="outlined" 
+                <Button
+                    mode="contained" 
                     icon="arrow-right-circle" 
-                    style={{flex:1, width:10, height:30, marginTop: 7 }} 
+                    style={{flex:1, height:30, marginTop: 7, paddingRight:9}} 
+                    labelStyle={{textAlignVertical: "bottom"}}
                     compact="true"
                     onPress={()=>getFilteredQuakeData()}
                 >
