@@ -10,7 +10,7 @@ import QuakeDialogSearch from './QuakeDialogSearch';
 import ListIcon from './ListIcon';
 
 
-const SearchList = () => {
+const SearchList = (props) => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ const SearchList = () => {
                     )
                 }
             </List.Section>
-            <QuakeDialogSearch data={selectedData}/>
+            <QuakeDialogSearch data={selectedData} jumpTo={props.jumpTo}/>
         </ScrollView>
     );
 };
