@@ -39,6 +39,7 @@ const ListItems = (props) => {
 
     return (
         <ScrollView
+            style={{height:'82%'}}
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }

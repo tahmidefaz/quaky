@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button, Subheading } from 'react-native-paper';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { setMapDataSource } from '../redux/actions';
 
@@ -19,7 +19,7 @@ const OptionsBar = (props) => {
     }
 
     return (
-        <View style={{backgroundColor: '#CFD8DC', justifyContent:'space-between', padding:5, flexDirection:'row'}}>
+        <View style={{backgroundColor: '#dfe6e9', justifyContent:'space-between', padding:5, flexDirection:'row'}}>
             <Subheading style={{marginHorizontal: 10, fontSize: 18, fontWeight:'bold',paddingTop:5}}>Options</Subheading>
             <Button
                 icon="map-check"
