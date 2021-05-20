@@ -17,7 +17,7 @@ const ListRoute = (props) => {
   return (
     <View>
       <Header title="Recent Earthquakes" screen="listview"/>
-      <OptionsBar/>
+      <OptionsBar {...props} screen="listview"/>
       <ListItems {...props} />
     </View>
   );

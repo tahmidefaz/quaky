@@ -43,7 +43,13 @@ const MapContainer = () => {
     coordinate_array.map((coordinate) => arr.push({latitude:coordinate[1], longitude: coordinate[0]}))
     return arr
   }
-  
+
+  let mapPointerData = 'recent';
+  if (state.mapDataSource === 'search') {
+    mapPointerData = state.quakeSearchData
+  } else {
+    mapPointerData = state.quakeData
+  }
 
   return(
     <View>
@@ -66,7 +72,7 @@ const MapContainer = () => {
               )
             }
             {
-              state.quakeData.map(info =>
+              mapPointerData.map(info =>
                 <Marker
                   pinColor={markerColor(info.properties.mag)}
                   coordinate={{

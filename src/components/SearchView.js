@@ -6,11 +6,11 @@ import SearchList from './SearchList';
 
 
 
-const SearchView = () => {
+const SearchView = (props) => {
     return (
         <View>
             <SearchBar/>
-            <OptionsBar/>
+            <OptionsBar {...props} screen='searchview'/>
             <SearchList/>
         </View>
     )
