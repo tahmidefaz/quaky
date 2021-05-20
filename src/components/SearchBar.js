@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Button, TextInput, Paragraph } from 'react-native-paper';
 import { TextInputMask } from 'react-native-masked-text'
 
-import { loadQuakeSearchData } from '../redux/actions';
+import { loadQuakeSearchData, setCurrentSearchInfo } from '../redux/actions';
 
 const SearchBar = () => {
     const [startDateValue, setStartDateValue] = useState('')
@@ -17,6 +17,7 @@ const SearchBar = () => {
     const getFilteredQuakeData = () => {
         dispatch(loadQuakeSearchData(startDateValue,endDateValue,magValue));
         setFilterInfo([startDateValue,endDateValue,magValue]);
+        dispatch(setCurrentSearchInfo([startDateValue,endDateValue,magValue]));
     }
 
     return (
@@ -26,7 +27,7 @@ const SearchBar = () => {
                     label="Start Date"
                     placeholder="YYYY-MM-DD"
                     mode="outlined"
-                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:10, paddingLeft:8, paddingTop:2}}
+                    style={styles.filterInputOptions}
                     onChangeText={text => {
                         setStartDateValue(text)
                     }}
@@ -44,7 +45,7 @@ const SearchBar = () => {
                     label="End Date"
                     mode="outlined"
                     placeholder="YYYY-MM-DD"
-                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:10, paddingLeft:8, paddingTop:2}}
+                    style={styles.filterInputOptions}
                     onChangeText={text => {
                         setEndDateValue(text)
                     }}
@@ -64,7 +65,7 @@ const SearchBar = () => {
                     label="Magnitude"
                     mode="outlined"
                     placeholder="x.xx"
-                    style={{flex:1, backgroundColor:"pink", height:30, paddingRight:18, paddingLeft:8}}
+                    style={styles.filterInputOptions}
                     onChangeText={text => {
                         setMagValue(text)
                     }}
@@ -75,6 +76,7 @@ const SearchBar = () => {
                             options={{
                                 mask: '9.99'
                             }}
+                            keyboardType='number-pad'
                         />
                     }
                 />
@@ -107,6 +109,13 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
     },
     filterBarStyle: {
-        backgroundColor:'pink'
+        backgroundColor:'#b2bec3'
+    },
+    filterInputOptions: {
+        flex:1,
+        backgroundColor:"#b2bec3",
+        height:30,
+        paddingRight:18,
+        paddingLeft:8
     }
 })
