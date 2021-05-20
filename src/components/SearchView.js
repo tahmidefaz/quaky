@@ -11,7 +11,7 @@ const SearchView = (props) => {
         <View>
             <SearchBar/>
             <OptionsBar {...props} screen='searchview'/>
-            <SearchList/>
+            <SearchList {...props}/>
         </View>
     )
 };

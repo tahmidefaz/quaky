@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setSearchDialogStatus } from '../redux/actions';
+import { setSearchDialogStatus, setMapRegion } from '../redux/actions';
 import { listItemColor, convertDMS, dateParser, formatTitle } from '../misc/support_functions';
 
 
@@ -14,6 +14,12 @@ const QuakeDialogSearch = (props) => {
   const dispatch = useDispatch();
   const hideDialog = () => {
     dispatch(setSearchDialogStatus(false))
+  };
+
+  const goToMap = (lat, long , jumpTo) => {
+    dispatch(setMapRegion(lat, long));
+    jumpTo('mapview');
+    dispatch(setSearchDialogStatus(false));
   };
 
   const openLink = async (link) => {
@@ -103,6 +109,9 @@ const QuakeDialogSearch = (props) => {
         </Dialog.Content>
         <Divider/>
         <Dialog.Actions style={styles.actionBar}>
+          <Button icon="map-plus" onPress={() => goToMap(props.data.latitude, props.data.longitude, props.jumpTo)}>
+            View On Map
+          </Button>
           <Button onPress={hideDialog}>Close</Button>
         </Dialog.Actions>
       </Dialog>
