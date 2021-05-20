@@ -8,6 +8,8 @@ import Header from './Header';
 import ListItems from './ListItems';
 import MapContainer from './MapContainer';
 import SearchView from './SearchView';
+import OptionsBar from './OptionsBar';
+
 
 
 const ListRoute = (props) => {
@@ -15,6 +17,7 @@ const ListRoute = (props) => {
   return (
     <View>
       <Header title="Recent Earthquakes" screen="listview"/>
+      <OptionsBar {...props} screen="listview"/>
       <ListItems {...props} />
     </View>
   );

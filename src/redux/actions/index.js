@@ -54,6 +54,13 @@ export function setDialogStatus(visible) {
     }
 }
 
+export function setMapDataSource(source) {
+    return {
+        type: ACTIONS.SET_MAP_DATA_SOURCE,
+        payload: source
+    }
+}
+
 export function setMapDialogStatus(visible) {
     return {
         type: ACTIONS.MAP_DIALOG_STATUS,
