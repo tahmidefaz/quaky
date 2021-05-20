@@ -31,7 +31,7 @@ const SearchList = (props) => {
     }
 
     return(
-        <ScrollView style={{height:'72%'}}>
+        <ScrollView style={{height:'66%'}}>
             <List.Section>
                 {
                     state.quakeSearchData.map(quake =>
