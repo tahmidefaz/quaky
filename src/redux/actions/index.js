@@ -106,6 +106,13 @@ export function showFaultLines(visible) {
     }
 }
 
+export function setCurrentSearchInfo(info) {
+    return {
+        type: ACTIONS.CURRENT_SEARCH_INFO,
+        payload: info
+    }
+}
+
 export function loadTestAction() {
     return {
         type: ACTIONS.TEST_ACTION,

@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setSearchDialogStatus, setMapRegion } from '../redux/actions';
+import { setSearchDialogStatus, setMapRegion, setMapDataSource } from '../redux/actions';
 import { listItemColor, convertDMS, dateParser, formatTitle } from '../misc/support_functions';
 
 
@@ -17,6 +17,7 @@ const QuakeDialogSearch = (props) => {
   };
 
   const goToMap = (lat, long , jumpTo) => {
+    dispatch(setMapDataSource('search'));
     dispatch(setMapRegion(lat, long));
     jumpTo('mapview');
     dispatch(setSearchDialogStatus(false));

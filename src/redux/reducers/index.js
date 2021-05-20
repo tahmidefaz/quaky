@@ -15,6 +15,7 @@ export const defaultQuakeData={
     },
     showFaultLines: false,
     quakeSearchData: [],
+    searchInfo: [],
     test_obj: {}
 }
 
@@ -64,6 +65,11 @@ export const quakeDataReducer = (state = defaultQuakeData, action) => {
             return {
                 ...state,
                 quakeSearchData: action.payload
+            }
+        case ACTIONS.CURRENT_SEARCH_INFO:
+            return  {
+                ...state,
+                searchInfo: action.payload
             }
         case ACTIONS.TEST_ACTION:
             return {

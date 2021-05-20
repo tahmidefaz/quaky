@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Button, TextInput, Paragraph } from 'react-native-paper';
 import { TextInputMask } from 'react-native-masked-text'
 
-import { loadQuakeSearchData } from '../redux/actions';
+import { loadQuakeSearchData, setCurrentSearchInfo } from '../redux/actions';
 
 const SearchBar = () => {
     const [startDateValue, setStartDateValue] = useState('')
@@ -17,6 +17,7 @@ const SearchBar = () => {
     const getFilteredQuakeData = () => {
         dispatch(loadQuakeSearchData(startDateValue,endDateValue,magValue));
         setFilterInfo([startDateValue,endDateValue,magValue]);
+        dispatch(setCurrentSearchInfo([startDateValue,endDateValue,magValue]));
     }
 
     return (
@@ -75,6 +76,7 @@ const SearchBar = () => {
                             options={{
                                 mask: '9.99'
                             }}
+                            keyboardType='number-pad'
                         />
                     }
                 />

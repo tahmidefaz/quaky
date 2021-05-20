@@ -16,7 +16,7 @@ const SearchView = (props) => {
             {
                 state.quakeSearchData.length > 0 &&  <OptionsBar {...props} screen='searchview'/>
             }
-            <SearchList/>
+            <SearchList {...props}/>
         </View>
     )
 };
