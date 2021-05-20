@@ -32,8 +32,8 @@ const Header = (props) => {
             <StatusBar style='light'/>
             {
                 props.screen === 'mapview' ?
-                <View style={{ flexDirection:'column', flex:1}}>
-                    <View style={{flexDirection:'row',flex:1}}>
+                <View style={{ flexDirection:'column', flex:1, padding: 2, paddingTop: 5 }}>
+                    <View style={{flexDirection:'row',flex:1, paddingBottom:3}}>
                         <Appbar.Content title={props.title}/>
                         <Menu
                             visible={visible}
@@ -71,11 +71,11 @@ export default Header;
 const styles = StyleSheet.create({
     mapInfo: {
         color:'white',
-        width: '100%',
+        width: '90%',
         flex:1,
         marginTop:10,
         marginBottom:2,
-        paddingLeft: '2%',
+        paddingLeft: '3%',
         fontSize: 10
     }
 });
