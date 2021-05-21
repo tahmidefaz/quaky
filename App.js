@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 
 import {Provider as StoreProvider} from 'react-redux';
@@ -61,15 +60,3 @@ export default function App() {
       </StoreProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  marker: {
-    height: 20,
-    width: 20,
-    borderWidth: 3,
-    borderColor: 'white',
-    borderRadius: 20/2,
-    overflow: 'hidden',
-    backgroundColor: '#007AFF'
-  }
-});
