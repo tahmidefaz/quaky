@@ -31,7 +31,7 @@ const MapContainer = () => {
         place: quakeData.properties.place,
         longitude: quakeData.geometry.coordinates[0],
         latitude: quakeData.geometry.coordinates[1],
-        depth: quakeData.geometry.coordinates[2].toFixed(2),
+        depth: quakeData.geometry.coordinates[2] ? quakeData.geometry.coordinates[2].toFixed(2) : null,
         distance: calculateDistance(quakeData.geometry.coordinates[1], quakeData.geometry.coordinates[0], state.currentLocation, "M")
     });
     dispatch(setMapRegion(currentRegion.latitude, currentRegion.longitude, currentRegion.latitudeDelta, currentRegion.longitudeDelta));
