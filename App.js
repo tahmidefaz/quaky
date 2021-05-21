@@ -29,7 +29,7 @@ const defaultLocation = {
 export default function App() {
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestPermissionsAsync()
+      let { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
         store.dispatch(loadCurrentLocation(defaultLocation));
         store.dispatch(setMapRegion(defaultLocation.latitude, defaultLocation.longitude));
