@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { mapstyle } from './mapstyle';
 import { setMapDialogStatus, setMapRegion } from '../redux/actions';
-import { markerDescription, calculateDistance, markerColor } from '../misc/support_functions';
+import { markerDescription, calculateDistance, markerColor, dateParser } from '../misc/support_functions';
 import QuakeDialogMap from './QuakeDialogMap';
 
 import fault_data from '../misc/fault_data';
@@ -42,6 +42,13 @@ const MapContainer = () => {
     arr = []
     coordinate_array.map((coordinate) => arr.push({latitude:coordinate[1], longitude: coordinate[0]}))
     return arr
+  }
+
+  const mapMarkerTime = (time) => {
+    if (state.mapDataSource === 'search') {
+      return dateParser(time);
+    }
+    return markerDescription(time);
   }
 
   let mapPointerData = 'recent';
@@ -81,7 +88,7 @@ const MapContainer = () => {
                   }}
                   title={info.properties.title}
                   description={
-                      markerDescription(info.properties.time)+" "+
+                      "🕗 "+mapMarkerTime(info.properties.time)+" 🔺 "+
                       calculateDistance(info.geometry.coordinates[1],info.geometry.coordinates[0], state.currentLocation,"M")+" away"
                     }
                   key = {info.properties.code}

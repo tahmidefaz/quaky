@@ -1,5 +1,5 @@
 import React,{ useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Keyboard } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Button, TextInput, Paragraph } from 'react-native-paper';
 import { TextInputMask } from 'react-native-masked-text'
@@ -18,6 +18,7 @@ const SearchBar = () => {
         dispatch(loadQuakeSearchData(startDateValue,endDateValue,magValue));
         setFilterInfo([startDateValue,endDateValue,magValue]);
         dispatch(setCurrentSearchInfo([startDateValue,endDateValue,magValue]));
+        Keyboard.dismiss();
     }
 
     return (
