@@ -100,17 +100,6 @@ const styles = StyleSheet.create({
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
       zIndex: -1
-    },
-    radius: {
-      height: 50,
-      width: 50,
-      borderRadius: 50 / 2,
-      overflow: 'hidden',
-      backgroundColor: 'rgba(0, 122, 255, 0.1)',
-      borderWidth: 1,
-      borderColor: 'rgba(0,122,255,0.3)',
-      alignItems: 'center',
-      justifyContent: 'center'
     }
 });
 
