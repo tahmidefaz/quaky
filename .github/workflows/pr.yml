@@ -16,5 +16,5 @@ jobs:
       with:
         node-version: 14.x
 
-    - run: npm i --only=dev
+    - run: npm ci
     - run: npm run lint
