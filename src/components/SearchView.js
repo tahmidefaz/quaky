@@ -29,7 +29,7 @@ const SearchView = (props) => {
                 action={{
                 label: 'Undo',
                 }}>
-                    Hey there! I'm a Snackbar.
+                    Invalid date input. Please try again!
             </Snackbar>
         </View>
     )
