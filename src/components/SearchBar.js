@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux';
 import { Button, TextInput, Paragraph } from 'react-native-paper';
 import { TextInputMask } from 'react-native-masked-text'
 
-import { loadQuakeSearchData, setCurrentSearchInfo } from '../redux/actions';
+import { loadQuakeSearchData, setCurrentSearchInfo, setSnackbarVisible } from '../redux/actions';
+import { validateDate } from '../misc/support_functions';
+
 
 const SearchBar = () => {
     const [startDateValue, setStartDateValue] = useState('')
@@ -15,9 +17,14 @@ const SearchBar = () => {
     const dispatch = useDispatch();
 
     const getFilteredQuakeData = () => {
-        dispatch(loadQuakeSearchData(startDateValue,endDateValue,magValue));
-        setFilterInfo([startDateValue,endDateValue,magValue]);
-        dispatch(setCurrentSearchInfo([startDateValue,endDateValue,magValue]));
+        if (!validateDate(startDateValue,endDateValue)){
+            dispatch(setSnackbarVisible(true));
+        } else {
+            dispatch(setSnackbarVisible(false));
+            dispatch(loadQuakeSearchData(startDateValue,endDateValue,magValue));
+            setFilterInfo([startDateValue,endDateValue,magValue]);
+            dispatch(setCurrentSearchInfo([startDateValue,endDateValue,magValue]));
+        }
         Keyboard.dismiss();
     }
 
@@ -118,5 +125,5 @@ const styles = StyleSheet.create({
         height:30,
         paddingRight:18,
         paddingLeft:8
-    }
+    },
 })

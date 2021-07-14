@@ -16,6 +16,7 @@ export const defaultQuakeData={
     showFaultLines: false,
     quakeSearchData: [],
     searchInfo: [],
+    snackbarVisible: false,
     test_obj: {}
 }
 
@@ -70,6 +71,11 @@ export const quakeDataReducer = (state = defaultQuakeData, action) => {
             return  {
                 ...state,
                 searchInfo: action.payload
+            }
+        case ACTIONS.SNACKBAR_VISIBLE:
+            return {
+                ...state,
+                snackbarVisible: action.payload
             }
         case ACTIONS.TEST_ACTION:
             return {
