@@ -28,9 +28,6 @@ const SearchView = (props) => {
                 onDismiss={onDismissSnackBar}
                 action={{
                 label: 'Undo',
-                onPress: () => {
-                    // Do something
-                },
                 }}>
                     Hey there! I'm a Snackbar.
             </Snackbar>
