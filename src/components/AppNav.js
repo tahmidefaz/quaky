@@ -56,9 +56,9 @@ const AppNav = () => {
   },[]);
 
   const [routes] = React.useState([
-    { key: 'listview', title: 'Quakes', icon: 'format-line-weight' },
-    { key: 'mapview', title: 'Map View', icon: 'map' },
+    { key: 'listview', title: 'Recent', icon: 'format-line-weight' },
     { key: 'searchview', title: 'Search', icon: 'history'},
+    { key: 'mapview', title: 'Map View', icon: 'map' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
