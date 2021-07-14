@@ -113,6 +113,13 @@ export function setCurrentSearchInfo(info) {
     }
 }
 
+export function setSnackbarVisible(visible) {
+    return {
+        type: ACTIONS.SNACKBAR_VISIBLE,
+        payload: visible
+    }
+}
+
 export function loadTestAction() {
     return {
         type: ACTIONS.TEST_ACTION,

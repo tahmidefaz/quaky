@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { Colors } from 'react-native-paper';
 
 
@@ -100,4 +101,19 @@ export const incrementDate = (dateString) => {
     dateObj.setDate(dateObj.getDate() + 1);
     dateString = `${dateObj.getUTCFullYear()}-${dateObj.getUTCMonth()+1}-${dateObj.getUTCDate()}`;
     return dateString;
+}
+
+export const validateDate = (startDateString, endDateString) => {
+    const startMoment = moment(startDateString, 'YYYY-MM-DD',true)
+    const endMoment = moment(endDateString, 'YYYY-MM-DD',true)
+
+    if(!(startMoment.isValid() && endMoment.isValid())) {
+        return false;
+    }
+
+    if (startMoment > endMoment) {
+        return false;
+    }
+
+    return true;
 }

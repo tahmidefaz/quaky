@@ -56,7 +56,7 @@ const Header = (props) => {
                         {
                             state.mapDataSource === 'recent' ?
                                 'Showing recent earthquakes' :
-                                `Showing results from ${state.searchInfo[0]} to ${state.searchInfo[1]} for magnitude ${state.searchInfo[2]}+`
+                                `Results from ${state.searchInfo[0]} to ${state.searchInfo[1]} for magnitude ${state.searchInfo[2]}+`
                         }
                     </Subheading>
                 </View> :
